@@ -24,7 +24,7 @@ window.STORE = {
   // Packs shown in the order form. The first one is the main price.
   packs: [
     { id: 'one', label: '1 bottle', qty: 1, price: 299, mrp: 349 },
-    { id: 'two', label: '2 bottles', qty: 2, price: 599, badge: 'Best value' }
+    { id: 'two', label: '2 bottles', qty: 2, price: 499, mrp: 598, badge: 'Best value' }
   ],
 
   // Rupees off the whole order when paying online.
