@@ -21,7 +21,14 @@
   .muted{color:var(--muted)}
   .demo{background:var(--demo-bg);color:var(--demo-ink);font-size:12px;text-align:center;padding:8px var(--gut)}
   .pill{display:inline-block;background:var(--demo-bg);color:var(--demo-ink);font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;letter-spacing:.04em}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--bg);font-weight:700;border-radius:14px;padding:13px 20px;border:0;cursor:pointer;font-size:15px;min-height:48px}
+  .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--accent);color:var(--bg);font-weight:700;border-radius:12px;padding:10px 18px;border:0;cursor:pointer;font-size:14px;min-height:42px;transition:transform .18s ease,box-shadow .18s ease}
+  .btn::before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);pointer-events:none}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px rgba(27,35,32,.5)}
+  .btn:hover::before{left:120%;transition:left .6s ease}
+  .btn:active{transform:translateY(0) scale(.97)}
+  .btn.go::after{content:"→";display:inline-block;transition:transform .2s ease}
+  .btn.go:hover::after{transform:translateX(4px)}
+  @media(prefers-reduced-motion:reduce){.btn,.btn::after{transition:none}.btn:hover,.btn:active{transform:none}.btn:hover::before{display:none}}
   .btn.ghost{background:var(--soft);color:var(--ink)}
   :focus-visible{outline:3px solid var(--green);outline-offset:2px}
   .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
@@ -105,7 +112,7 @@
       <div class="eb">Best seller</div>
       <h1>Use less oil. Keep the flavour.</h1>
       <p>2-in-1 glass sprayer and pourer, 500 ml.</p>
-      <div class="btns"><a class="btn" href="product.html?p=oil-sprayer">Shop now</a><span class="price" id="featPrice"></span></div>
+      <div class="btns"><a class="btn go" href="product.html?p=oil-sprayer">Shop now</a><span class="price" id="featPrice"></span></div>
     </div>
     <div class="img" id="featImg">Featured product photo</div>
   </div>
