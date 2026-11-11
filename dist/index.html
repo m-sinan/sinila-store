@@ -117,16 +117,6 @@
 
   <a href="product.html?p=oil-sprayer" class="banner"><img src="img/banner.png" alt="Sinila 2-in-1 glass oil sprayer and pourer. Use less oil, keep the flavour." width="1200" height="500"></a>
 
-  <div class="feat">
-    <div>
-      <div class="eb">Best seller</div>
-      <h1>Use less oil. Keep the flavour.</h1>
-      <p>2-in-1 glass sprayer and pourer, 500 ml.</p>
-      <div class="btns"><a class="btn go" href="product.html?p=oil-sprayer">Shop now</a><span class="price" id="featPrice"></span></div>
-    </div>
-    <div class="img" id="featImg">Featured product photo</div>
-  </div>
-
   <section>
     <div class="sec-h"><h2>Kitchen helpers</h2><a href="#" onclick="return false">See all</a></div>
     <div class="grid" id="grid"></div>
@@ -167,7 +157,7 @@
   $('#logo').textContent=S.name||'Sinila';
   if(DEMO)$('#demoBar').hidden=false;
   document.title=(S.name||'Sinila')+' · Kitchen helpers';
-  $('#featPrice').textContent=feat.price?rupee(feat.price):'';
+  var fp=document.getElementById('featPrice');if(fp)fp.textContent=feat.price?rupee(feat.price):'';
   $('#cartTotal').textContent=feat.price?rupee(feat.price):'';
   $('#copy').textContent='© '+new Date().getFullYear()+' '+(C.legalName||S.name||'');
 
