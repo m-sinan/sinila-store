@@ -24,8 +24,10 @@
   .btn.ghost{background:var(--soft);color:var(--ink)}
   :focus-visible{outline:3px solid var(--green);outline-offset:2px}
   .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
-  .top .in{display:flex;justify-content:space-between;align-items:center;height:60px;padding-inline:var(--gut);max-width:1100px;margin:0 auto}
+  .top .in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:60px;padding-inline:var(--gut);max-width:1100px;margin:0 auto}
   .logo{font-weight:800;font-size:22px;letter-spacing:-.03em}
+  .top .in>:first-child{justify-self:start}
+  .top .in>:last-child{justify-self:end}
   .back{font-size:14px;font-weight:600;color:var(--green)}
   .ic{width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;color:var(--ink)}
 
