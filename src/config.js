@@ -41,7 +41,7 @@ window.STORE = {
   instagram: '',                                 // e.g. 'https://instagram.com/yourpage'
 
   // Google Apps Script web app URL (we connect this in the next step).
-  scriptUrl: '',
+  scriptUrl: 'https://script.google.com/macros/s/AKfycbwzWE-OYAlzTL3Tx4ioSJIgW0jVEEahHJk1H2SYFcuvnvAt-KWwZA5wao45iPG3ffIa1w/exec',
 
   // ---- REAL content goes here when your sample arrives ----
   images: [],        // e.g. ['img/1.jpg', 'img/2.jpg']  (your own photos)
