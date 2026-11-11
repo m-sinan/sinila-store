@@ -110,7 +110,7 @@
       <div class="eb" id="cat">Oil sprayers</div>
       <h1 id="pname">Product</h1>
       <p class="lead" id="pshort"></p>
-      <div><span class="price" id="pprice"></span><span class="was" id="pmrp" hidden></span></div>
+      <div><span class="price" id="pprice"></span><span class="was" id="pmrp" hidden></span><span class="tag" id="poff" hidden style="margin-left:8px;font-size:12px"></span></div>
       <div class="packs" id="packs"></div>
       <a class="btn cta go" href="order.html" id="addBtn">Add to order</a>
       <div class="trust">
@@ -171,7 +171,7 @@
   $('#pname').textContent=P.name||pr.name||'';
   $('#pshort').textContent=P.short||'';
   $('#pprice').textContent=rupee(packs[0].price);
-  function showMrp(p){var m=$('#pmrp');if(p&&p.mrp&&p.mrp>p.price){m.textContent=rupee(p.mrp);m.hidden=false}else{m.hidden=true}}
+  function showMrp(p){var m=$('#pmrp'),o=$('#poff');if(p&&p.mrp&&p.mrp>p.price){m.textContent=rupee(p.mrp);m.hidden=false;o.textContent=Math.round((p.mrp-p.price)/p.mrp*100)+'% off';o.hidden=false}else{m.hidden=true;o.hidden=true}}
   showMrp(packs[0]);
   $('#sPrice').textContent=rupee(packs[0].price);
   $('#tDelivery').textContent=S.deliveryText||'Delivery in 7-10 working days';

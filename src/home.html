@@ -75,6 +75,7 @@
   .pc small{color:var(--muted);font-size:12px}
   .pc .row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
   .pc .pr{font-weight:800}
+  .pc .off{position:absolute;top:16px;left:16px;z-index:2;background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:99px}
   .pc .mrp{font-weight:600;color:var(--muted);font-size:14px;margin-left:6px}
   .add{width:34px;height:34px;border-radius:12px;background:var(--accent);color:var(--bg);display:grid;place-items:center;font-size:20px;border:0;cursor:pointer;text-decoration:none}
   .soon{font-size:11px;background:var(--soft);color:var(--muted);padding:4px 8px;border-radius:99px;font-weight:600}
@@ -171,7 +172,7 @@
   $('#grid').innerHTML=prods.map(function(p){
     var img=safe(p.image);
     var inner='<div class="img">'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.name)+'" style="width:100%;height:100%;object-fit:cover;border-radius:14px">':'Product photo')+'</div>';
-    if(p.status==='live') return '<a class="pc" href="product.html?p='+esc(p.slug)+'">'+inner+'<b>'+esc(p.name)+'</b><small>'+esc(p.short||'')+'</small><div class="row"><span class="pr">'+rupee(p.price)+(p.mrp&&p.mrp>p.price?' <s class="mrp">'+rupee(p.mrp)+'</s>':'')+'</span><span class="add" aria-hidden="true">+</span></div></a>';
+    if(p.status==='live') return '<a class="pc" href="product.html?p='+esc(p.slug)+'">'+(p.mrp&&p.mrp>p.price?'<span class="off">'+Math.round((p.mrp-p.price)/p.mrp*100)+'% off</span>':'')+inner+'<b>'+esc(p.name)+'</b><small>'+esc(p.short||'')+'</small><div class="row"><span class="pr">'+rupee(p.price)+(p.mrp&&p.mrp>p.price?' <s class="mrp">'+rupee(p.mrp)+'</s>':'')+'</span><span class="add" aria-hidden="true">+</span></div></a>';
     return '<div class="pc off">'+inner+'<b>'+esc(p.name)+'</b><small>'+esc(p.short||'')+'</small><div class="row"><span class="soon">Soon</span></div></div>';
   }).join('');
 
