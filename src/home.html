@@ -184,7 +184,7 @@
     var list=(S.socialReels||[]).filter(function(r){return DEMO||!r.demo});
     $('#reels').innerHTML=list.map(function(r){
       var src=safe(r.src), poster=safe(r.poster);
-      var body=src?'<video src="'+esc(src)+'" controls playsinline preload="metadata"'+(poster?' poster="'+esc(poster)+'"':'')+'></video>':'<div class="ph">'+(DEMO?'Demo reel':'Reel')+'<br>Add video in config.js</div>';
+      var body=src?'<video src="'+esc(src)+'" autoplay muted loop playsinline preload="metadata"'+(poster?' poster="'+esc(poster)+'"':'')+'></video>':'<div class="ph">'+(DEMO?'Demo reel':'Reel')+'<br>Add video in config.js</div>';
       return '<div class="reel">'+body+(r.demo?'<span class="pill">Demo</span>':'')+'<div class="cap">'+esc(r.title||'')+'</div></div>';
     }).join('');
     [].forEach.call($('#langs').children,function(b){b.setAttribute('aria-pressed',b.dataset.l===lang)});
