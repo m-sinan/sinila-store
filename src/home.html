@@ -52,6 +52,8 @@
   .chip{flex:0 0 auto;padding:8px 15px;border-radius:99px;background:var(--soft);font-size:13px;font-weight:600;border:0;color:var(--ink);cursor:pointer}
   .chip[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
 
+.banner{display:block;margin:14px 0 0;border-radius:20px;overflow:hidden}
+  .banner img{width:100%;height:auto;border-radius:20px}
   .feat{margin:14px 0 0;border-radius:20px;background:var(--soft);padding:16px;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center}
   @media(min-width:760px){.feat{grid-template-columns:1fr 240px;padding:28px;gap:28px}}
   .feat .eb{color:var(--green)}
@@ -112,6 +114,8 @@
 <main>
   <div class="search" role="search">Search kitchen helpers</div>
   <div class="chips" id="chips" role="group" aria-label="Categories"></div>
+
+  <a href="product.html?p=oil-sprayer" class="banner"><img src="img/banner.png" alt="Sinila 2-in-1 glass oil sprayer and pourer. Use less oil, keep the flavour." width="1200" height="500"></a>
 
   <div class="feat">
     <div>
