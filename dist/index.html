@@ -131,11 +131,8 @@
   </section>
 
   <section>
-    <div class="sec-h"><h2>Visit us</h2></div>
-    <div class="wrap info">
-      <div class="card" id="contact"></div>
-      <div class="map" id="map"></div>
-    </div>
+    <div class="sec-h"><h2>Customer care</h2></div>
+    <div class="card" id="care"></div>
   </section>
 </main>
 
@@ -194,11 +191,12 @@
   $('#langs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;lang=b.dataset.l;try{localStorage.setItem('sinila-lang',lang)}catch(x){}drawReels()});
   drawReels();
 
-  // visit us
-  var rows=[['Address',C.address],['Phone',C.phone],['Email',C.email],['Hours',C.hours]];
-  $('#contact').innerHTML='<h2>'+esc(C.name||S.name||'')+'</h2><dl>'+rows.filter(function(r){return r[1]}).map(function(r){return '<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>'}).join('')+'</dl>';
-  var mu=safe(C.mapEmbedUrl);
-  $('#map').innerHTML=/^https:\/\//.test(mu)?'<iframe src="'+esc(mu)+'" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Our location"></iframe>':'<div><b>Map appears here</b><br><span class="muted" style="font-size:12px">Add your Google Maps link in config.js</span></div>';
+  // customer care
+  var care=[];
+  if(C.phone)care.push('<a class="btn ghost" href="tel:'+esc(C.phone.replace(/\s/g,''))+'">Call us</a>');
+  if(C.email)care.push('<a class="btn ghost" href="mailto:'+esc(C.email)+'">Email us</a>');
+  if(S.whatsapp)care.push('<a class="btn" href="https://wa.me/'+esc(S.whatsapp)+'">WhatsApp us</a>');
+  $('#care').innerHTML='<p class="muted">Questions about your order, the sprayer or delivery? We are happy to help.</p><div class="btns" style="display:flex;gap:10px;flex-wrap:wrap">'+care.join('')+'</div>';
 })();
 </script>
 </body></html>

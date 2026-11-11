@@ -106,7 +106,7 @@
 
   <section id="contact">
     <div class="eb">Contact</div>
-    <h2 style="margin-top:6px">Talk to us</h2>
+    <h2 style="margin-top:6px">Customer care</h2>
     <div class="card"><dl id="contactList"></dl></div>
   </section>
 
@@ -123,7 +123,7 @@
   if(S.demoMode)$('#demoBar').hidden=false;
   document.title='Policies · '+(S.name||'Sinila');
   $('#ship').textContent=(S.deliveryText||'Delivery in 7-10 working days')+'.';
-  var rows=[['Phone',C.phone||S.contactPhone],['Email',C.email||S.contactEmail],['Address',C.address],['Hours',C.hours]];
+  var rows=[['Phone',C.phone||S.contactPhone],['Email',C.email||S.contactEmail]];
   $('#contactList').innerHTML=rows.filter(function(r){return r[1]}).map(function(r){return '<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>'}).join('');
   var demo=!!S.demoMode;
   $('#retForm').addEventListener('submit',function(ev){ev.preventDefault();var e=$('#r-err');e.textContent='';var ph=$('#r-phone').value.replace(/\D/g,'');if($('#r-name').value.trim().length<2)return e.textContent='Please enter your name.';if(!/^[6-9]\d{9}$/.test(ph))return e.textContent='Please enter the phone number used for the order.';var up=$('#r-upi').value.trim();if(up&&!/^[\w.\-]{2,}@[a-zA-Z]{2,}$/.test(up))return e.textContent='Please check the UPI ID.';if(!$('#r-type').value)return e.textContent='Please choose what went wrong.';$('#retForm').querySelectorAll('input,select,textarea,button').forEach(function(x){x.disabled=true});var d=$('#r-done');var fm=$('#retForm');

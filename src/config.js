@@ -70,13 +70,6 @@ window.STORE = {
   // Your own posts. { platform: 'Instagram', url: 'https://...', image: 'img/post1.jpg', caption: '...' }
   socialPosts: [],
 
-  company: {
-    address: 'Your address, Whitefield, Bengaluru 560066',
-    hours: 'Mon to Sat, 10 am to 6 pm',
-    mapsUrl: '',      // paste the Google Maps share link
-    mapEmbed: '',     // paste the embed link (src of the iframe from Google Maps > Share > Embed)
-    demo: true
-  },
 
   // Only add REAL reviews from your own customers, with their permission.
   // Anything with demo:true is hidden automatically at launch.
@@ -93,12 +86,8 @@ window.STORE = {
 // ---------- HOME PAGE CONTENT (demo until launch) ----------
 window.STORE.company = {
   name: 'Sinila',
-  legalName: 'Your registered business name',   // fill when registered
-  address: 'Your street, area, Bengaluru 560066',  // real address
-  phone: '+91 00000 00000',
-  email: 'you@example.com',
-  hours: 'Mon-Sat, 10:00-18:00',
-  mapEmbedUrl: ''   // Google Maps embed link, e.g. https://www.google.com/maps/embed?pb=...
+  phone: '+91 00000 00000',   // your customer care number
+  email: 'you@example.com'    // your customer care email
 };
 
 window.STORE.socials = [
