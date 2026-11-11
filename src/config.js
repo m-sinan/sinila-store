@@ -35,8 +35,8 @@ window.STORE = {
   deliveryText: 'Delivery in 7-10 working days',
   shippingNote: 'Free delivery across India',   // confirm this is true before launch
 
-  contactEmail: 'you@example.com',
-  contactPhone: '+91 00000 00000',
+  contactEmail: 'officialnestoraindia@gmail.com',
+  contactPhone: '+91 8078918423',
   whatsapp: '',                                  // e.g. '919XXXXXXXXX'
   instagram: '',                                 // e.g. 'https://instagram.com/yourpage'
 
@@ -86,8 +86,8 @@ window.STORE = {
 // ---------- HOME PAGE CONTENT (demo until launch) ----------
 window.STORE.company = {
   name: 'Sinila',
-  phone: '+91 00000 00000',   // your customer care number
-  email: 'you@example.com'    // your customer care email
+  phone: '+91 8078918423',   // customer care number
+  email: 'officialnestoraindia@gmail.com'    // customer care email
 };
 
 window.STORE.socials = [
