@@ -137,7 +137,7 @@
   function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
   function esc(t){var d=document.createElement('div');d.textContent=t==null?'':String(t);return d.innerHTML}
   function rupee(n){return '₹'+Number(n).toLocaleString('en-IN')}
-  var packs=S.packs||[{id:'one',label:'1 bottle',qty:1,price:349}], prepaid=S.prepaidDiscount||0, advance=S.codAdvance||0;
+  var packs=S.packs||[{id:'one',label:'1 bottle',qty:1,price:299}], prepaid=S.prepaidDiscount||0, advance=S.codAdvance||0;
   var q=new URLSearchParams(location.search), chosen=Math.min(packs.length-1,Math.max(0,+(q.get('pack')||0))), pay='prepaid';
 
   $('#logo').textContent=S.name||'Sinila';

@@ -1,7 +1,7 @@
 // Sinila store backend. Paste into Extensions > Apps Script of the Google Sheet.
 // Run setup() once. Then Deploy > New deployment > Web app > Execute as: Me, Who has access: Anyone.
 
-var PRICES = { 'one': 349, 'two': 599 };  // keep in sync with src/config.js packs
+var PRICES = { 'one': 299, 'two': 599 };  // keep in sync with src/config.js packs
 var PREPAID_DISCOUNT = 50;
 var SHEETS = {
   Orders: ['Order ID','Created','Name','Phone','House/Building','Road/Area/Colony','Pin code','City','State','Landmark','Pack','Payment','Total','Status','Courier','Tracking no','Tracking link','Last updated'],

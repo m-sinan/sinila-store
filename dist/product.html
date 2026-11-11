@@ -162,7 +162,7 @@
   function safe(u){u=String(u||'').trim();return /^(https?:\/\/|[\w\-./]+$)/i.test(u)?u:''}
   var slug=new URLSearchParams(location.search).get('p')||'oil-sprayer';
   var P=(S.products||[]).filter(function(p){return p.slug===slug})[0]||(S.products||[])[0]||{};
-  var pr=S.product||{}, packs=S.packs||[{label:'1 bottle',qty:1,price:P.price||349}], prepaid=S.prepaidDiscount||0;
+  var pr=S.product||{}, packs=S.packs||[{label:'1 bottle',qty:1,price:P.price||299}], prepaid=S.prepaidDiscount||0;
   var chosen=0;
 
   $('#logo').textContent=S.name||'Sinila';
