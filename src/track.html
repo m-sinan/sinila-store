@@ -120,7 +120,14 @@
     r.querySelector('.rate')&&r.querySelector('.rate').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',String(x===b))})});
     r.scrollIntoView({behavior:'smooth',block:'start'});
   });
-  var t=new URLSearchParams(location.search).get('t'); if(t==='return')setMode('return');
+  var qp=new URLSearchParams(location.search), t=qp.get('t');
+  if(t==='return')setMode('return');
+  if(qp.get('id')){
+    if(!t)setMode('order');
+    $('#id').value=qp.get('id');
+    $('#ph').value=qp.get('phone')||'';
+    if(/^[6-9]\d{9}$/.test((qp.get('phone')||'').replace(/\D/g,''))) $('#form').dispatchEvent(new Event('submit',{cancelable:true}));
+  }
 })();
 </script>
 </body></html>
