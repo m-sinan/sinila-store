@@ -91,12 +91,12 @@
   var MODE={
     order:{label:'Order number',ph:'e.g. SN1234',btn:'Track order',kind:'Order',
       steps:['Order placed','Confirmed','Packed','Shipped','Delivered'],
-      map:{'pending confirmation':0,'confirmed':1,'packed':2,'shipped':3,'delivered':4},
+      map:{'pending confirmation':0,'confirmed':1,'packed':2,'shipped':3,'delivered':5},
       demo:{status:'Shipped',now:3,trackingNo:'',courier:'',trackingLink:''},
       note:'Keep your phone nearby. The courier may call before delivery.'},
     'return':{label:'Request number',ph:'e.g. RT1234',btn:'Track return',kind:'Request',
       steps:['Requested','Checked','Refund or replacement','Closed'],
-      map:{'new':0,'checking':1,'replacement shipped':2,'refund started':2,'closed':3},
+      map:{'new':0,'checking':1,'replacement shipped':2,'refund started':2,'closed':4},
       demo:{status:'Refund started',now:2,trackingNo:'',courier:'',trackingLink:''},
       note:'Refund goes to your UPI ID (cash on delivery) or original payment method within 7 working days.'}
   };
