@@ -52,6 +52,9 @@
   .simple li.todo .t{color:var(--muted)}
   .info{margin-top:14px;background:var(--soft);border-radius:14px;padding:14px;font-size:13px;color:var(--muted)}
   .info b{color:var(--ink)}
+  .celebrate{margin-top:18px;background:var(--soft);border-radius:18px;padding:20px;text-align:center;display:grid;justify-items:center;gap:6px}
+  .celebrate h3{font-size:1.3rem;margin-top:6px}
+  .celebrate p{color:var(--muted);font-size:14px}
   .info a{color:var(--green);font-weight:600}
   .note{background:var(--soft);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
   .note b{display:block;margin-bottom:6px}
@@ -90,8 +93,8 @@
   function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
   var MODE={
     order:{label:'Order number',ph:'e.g. SN1234',btn:'Track order',kind:'Order',
-      steps:['Order placed','Confirmed','Packed','Shipped','Delivered'],
-      map:{'pending confirmation':0,'confirmed':1,'packed':2,'shipped':3,'delivered':5},
+      steps:['Order placed','Confirmed','Packed','Shipped'],
+      map:{'pending confirmation':0,'confirmed':1,'packed':2,'shipped':3,'delivered':4},
       demo:{status:'Shipped',now:3,trackingNo:'',courier:'',trackingLink:''},
       note:'Keep your phone nearby. The courier may call before delivery.'},
     'return':{label:'Request number',ph:'e.g. RT1234',btn:'Track return',kind:'Request',
@@ -132,7 +135,9 @@
     } else {
       status=M.demo.status; now=M.demo.now;
     }
-    var title=cancelled?(m==='order'?'Order cancelled':'Request cancelled'):status;
+    var delivered=!cancelled && m==='order' && res && String(res.status||'').toLowerCase().trim()==='delivered';
+    var celebrate=delivered?'<div class="celebrate"><svg viewBox="0 0 96 96" width="84" height="84" aria-hidden="true"><circle cx="48" cy="48" r="44" fill="#E8EFE2"/><circle cx="48" cy="48" r="30" fill="#4D6B45"/><path d="M34 49l9 9 19-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="18" r="4" fill="#D7A63A"/><circle cx="84" cy="22" r="3" fill="#D7A63A"/><circle cx="86" cy="72" r="4" fill="#7F9777"/><circle cx="10" cy="76" r="3" fill="#7F9777"/></svg><h3>Congratulations!</h3><p>Your order has been delivered. We hope you enjoy your Sinila oil sprayer.</p></div>':'';
+    var title=cancelled?(m==='order'?'Order cancelled':'Request cancelled'):(delivered?'Delivered':status);
     var list='';
     if(!cancelled){
       list='<ul class="simple">'+M.steps.map(function(name,i){var c=i<now?'done':i===now?'now':'todo';return '<li class="'+c+'"><span class="l"><span class="d"></span><b>'+esc(name)+'</b></span></li>'}).join('')+'</ul>';
@@ -142,7 +147,7 @@
     html=(!res&&S.demoMode?'<span class="pill">Demo</span> ':'')+
       '<div class="rhead"><div><div class="eb">'+M.kind+' '+esc(String(id).replace(/[<>&]/g,''))+'</div><h2 style="margin:6px 0 0">'+esc(title)+'</h2>'+(updated?'<div class="muted" style="font-size:12px;margin-top:4px">'+updated+'</div>':'')+'</div>'+
       '<button type="button" class="refresh" id="refresh">Check again</button></div>'+
-      list+(cancelled?'':extra)+(cancelled?'':'<div class="note"><b>Please note</b><p>'+esc(note)+'</p></div>');
+      list+celebrate+(cancelled?'':extra)+((cancelled||delivered)?'':'<div class="note"><b>Please note</b><p>'+esc(note)+'</p></div>');
     r.innerHTML=html;
     r.scrollIntoView({behavior:'smooth',block:'start'});
     $('#refresh').addEventListener('click',function(){ if(last) lookup(last.mode,last.id,last.phone); });
