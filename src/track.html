@@ -51,13 +51,19 @@
   .note{background:var(--soft);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
   .note b{display:block;margin-bottom:6px}
   .note p{margin:4px 0;color:var(--muted)}
+  .loader{display:flex;gap:12px;align-items:center;color:var(--muted);padding:10px 0}
+  .spin{width:20px;height:20px;border:2.5px solid var(--line);border-top-color:var(--ink);border-radius:50%;animation:spin .8s linear infinite;flex:0 0 auto}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .rhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .refresh{border:0;background:var(--soft);color:var(--ink);font-weight:600;font-size:13px;padding:8px 12px;border-radius:99px;cursor:pointer;white-space:nowrap}
+  .refresh:disabled{opacity:.6;cursor:wait}
   .rate{margin-top:16px;display:grid;gap:8px;font-size:13px;color:var(--muted)}
   .rate div{display:flex;gap:8px}
   .rate button{flex:1;border:1.5px solid var(--mid);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 6px;font:600 13px Inter,sans-serif;cursor:pointer}
   .rate button[aria-pressed="true"]{border-color:var(--green);background:var(--soft)}
 </style>
 </head><body>
-<div class="demo" id="demoBar" hidden>Demo: sample status shown. Real status appears once the Google Sheet is connected.</div>
+<div class="demo" id="demoBar" hidden>Demo mode is on. Turn it off before launch.</div>
 <header class="top"><div class="in"><a class="back" href="index.html">← Shop</a><a class="logo" href="index.html" id="logo">Sinila</a><span></span></div></header>
 <main class="wrap">
   <div style="padding-top:20px"><div class="eb">Track</div><h1 style="margin-top:6px">Track your order or return</h1><p class="muted" style="margin-top:6px">Enter the number from your confirmation message and the phone number you used.</p></div>
@@ -78,55 +84,80 @@
   var S=window.STORE||{}, $=function(s){return document.querySelector(s)};
   function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
   var MODE={
-    order:{label:'Order number',ph:'e.g. SN1234',btn:'Track order',steps:[['Confirmed','We called you','07 Nov'],['Packed','Ready to ship','08 Nov'],['Shipped','With courier','09 Nov'],['Delivered','Arriving','Soon']],now:2,title:'Shipped, arriving in 2 to 4 days',kind:'Order',note:['Keep your phone nearby','The courier may call before delivery. If you miss it, message us.']},
-    'return':{label:'Request number',ph:'e.g. RT1234',btn:'Track return',steps:[['Requested','We have your request','06 Oct'],['Checked','Photo reviewed','08 Oct'],['Refund or replacement','Started','10 Oct'],['Closed','Done','10 Oct']],now:2,title:'Refund started',kind:'Request',note:['Please keep the item ready for pickup','Refund goes to your UPI ID (cash on delivery) or original payment method within 7 working days.']}
+    order:{label:'Order number',ph:'e.g. SN1234',btn:'Track order',kind:'Order',steps:[['Confirmed','We called you','07 Nov'],['Packed','Ready to ship','08 Nov'],['Shipped','With courier','09 Nov'],['Delivered','Arriving','Soon']],names:['Confirmed','Packed','Shipped','Delivered'],demoNow:2,demoTitle:'Shipped, arriving in 2 to 4 days',demoNote:['Keep your phone nearby','The courier may call before delivery. If you miss it, message us.']},
+    'return':{label:'Request number',ph:'e.g. RT1234',btn:'Track return',kind:'Request',steps:[['Requested','We have your request','06 Oct'],['Checked','Photo reviewed','08 Oct'],['Refund or replacement','Started','10 Oct'],['Closed','Done','10 Oct']],names:['Requested','Checked','Refund or replacement','Closed'],demoNow:2,demoTitle:'Refund started',demoNote:['Please keep the item ready for pickup','Refund goes to your UPI ID (cash on delivery) or original payment method within 7 working days.']}
   };
-  var mode='order';
+  var mode='order', last=null;
   function drawSteps(list,now){return '<div class="tl">'+list.map(function(s,i){var c=i<now?'done':i===now?'now':'';return '<div class="s '+c+'"><span class="dot">'+(i<now?'✓':'')+'</span><b>'+esc(s[0])+'</b><span class="d">'+esc(s[2])+'</span></div>'}).join('')+'</div>';}
   $('#logo').textContent=S.name||'Sinila';
   if(S.demoMode)$('#demoBar').hidden=false;
   $('#copy').textContent='\u00A9 '+new Date().getFullYear()+' '+(S.name||'');
   function setMode(m){
     mode=m; var M=MODE[m];
-    ['order','return'].forEach(function(k){var b=document.querySelector('[data-t="'+k+'"]');b.setAttribute('aria-selected',String(k===m))});
+    ['order','return'].forEach(function(k){document.querySelector('[data-t="'+k+'"]').setAttribute('aria-selected',String(k===m))});
     $('#idLabel').textContent=M.label; $('#id').placeholder=M.ph; $('#go').textContent=M.btn;
     $('#result').hidden=true; $('#err').textContent='';
   }
-  document.querySelector('.tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setMode(b.dataset.t)});
+  function showLoader(){
+    var r=$('#result'); r.hidden=false;
+    r.innerHTML='<div class="loader"><span class="spin" aria-hidden="true"></span><span>Checking your '+(mode==='return'?'return':'order')+'. This can take a few seconds...</span></div>';
+  }
+  function render(id,res){
+    var M=MODE[mode], r=$('#result');
+    var names=M.names, steps=M.steps, now=M.demoNow, title=M.demoTitle, extra='', notes=M.demoNote;
+    if(res){
+      var sm=String(res.status||'').toLowerCase();
+      now=0;
+      if(/closed|delivered|refunded|replaced/.test(sm)) now=3; else if(/refund|replacement|shipped/.test(sm)) now=2; else if(/packed|checking/.test(sm)) now=1;
+      title=res.status||'';
+      extra=res.trackingNo?'<p class="muted" style="margin-top:12px">Courier: '+esc(res.courier||'')+' · Tracking no: <b>'+esc(res.trackingNo)+'</b></p>':'';
+      notes=[];
+    }
+    var stepsHtml=drawSteps(steps.map(function(st,i){return [names[i],st[1],st[2]]}),now);
+    var noteHtml=notes.length?'<div class="note"><b>Please note</b>'+notes.map(function(n){return '<p>'+esc(n)+'</p>'}).join('')+'</div>':'';
+    r.innerHTML=(S.scriptUrl?'':(S.demoMode?'<span class="pill">Demo</span> ':''))+
+      '<div class="rhead"><div><div class="eb">'+M.kind+' '+esc(String(id).replace(/[<>&]/g,''))+'</div><h2 style="margin:6px 0 0">'+esc(title)+'</h2></div>'+
+      '<button type="button" class="refresh" id="refresh" aria-label="Check again">↻ Check again</button></div>'+
+      stepsHtml+extra+noteHtml+
+      (notes.length||!S.scriptUrl?'<div class="rate"><span>How was your experience?</span><div>'+['Bad','Ok','Good'].map(function(x){return '<button type="button" aria-pressed="false">'+x+'</button>'}).join('')+'</div></div>':'');
+    r.scrollIntoView({behavior:'smooth',block:'start'});
+    $('#refresh').addEventListener('click',function(){ if(last) lookup(last.mode,last.id,last.phone); });
+    var rate=r.querySelector('.rate'); if(rate)rate.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',String(x===b))})});
+  }
+  function lookup(m,id,phone){
+    last={mode:m,id:id,phone:phone};
+    try{sessionStorage.setItem('sinila-track',JSON.stringify(last))}catch(e){}
+    mode=m; var go=$('#go'), btn=$('#refresh');
+    if(!S.scriptUrl){ render(id,null); return; }
+    go.disabled=true; if(btn)btn.disabled=true; showLoader();
+    var url=S.scriptUrl+'?action=track&kind='+(m==='return'?'return':'order')+'&id='+encodeURIComponent(id)+'&phone='+encodeURIComponent(phone);
+    fetch(url).then(function(x){return x.json()}).then(function(res){
+      go.disabled=false;
+      if(!res.ok){ $('#result').hidden=true; $('#err').textContent=res.message||'Not found.'; return; }
+      $('#err').textContent=''; render(id,res);
+    }).catch(function(){
+      go.disabled=false; $('#result').hidden=true; $('#err').textContent='Could not reach the server. Try again.';
+    });
+  }
   $('#form').addEventListener('submit',function(ev){
     ev.preventDefault(); var e=$('#err'); e.textContent='';
     var M=MODE[mode], id=$('#id').value.trim(), ph=$('#ph').value.replace(/\D/g,'');
     if(id.length<4)return e.textContent='Please enter your '+M.label.toLowerCase()+'.';
     if(!/^[6-9]\d{9}$/.test(ph))return e.textContent='Please enter the phone number you used.';
-    var r=$('#result'); r.hidden=false;
-    if(S.scriptUrl){
-      var go=$('#go'); go.disabled=true;
-      var url=S.scriptUrl+'?action=track&kind='+(mode==='return'?'return':'order')+'&id='+encodeURIComponent(id)+'&phone='+encodeURIComponent(ph);
-      fetch(url).then(function(x){return x.json()}).then(function(res){
-        go.disabled=false;
-        if(!res.ok){e.textContent=res.message||'Not found.';r.hidden=true;return;}
-        var names=mode==='return'?['Requested','Checked','Refund or replacement','Closed']:['Confirmed','Packed','Shipped','Delivered'];
-        var sm=String(res.status||'').toLowerCase(), now=0;
-        if(/closed|delivered|refunded|replaced/.test(sm)) now=3; else if(/refund|replacement|shipped/.test(sm)) now=2; else if(/packed|checking/.test(sm)) now=1;
-        var steps=M.steps.map(function(st,i){return [names[i],st[1],st[2]]});
-        var extra=res.trackingNo?'<p class="muted" style="margin-top:12px">Courier: '+esc(res.courier||'')+' · Tracking no: <b>'+esc(res.trackingNo)+'</b></p>':'';
-        r.hidden=false;
-        r.innerHTML='<div class="eb">'+M.kind+' '+esc(id.replace(/[<>&]/g,''))+'</div><h2 style="margin:6px 0 14px">'+esc(res.status||'')+'</h2>'+drawSteps(steps,now)+extra;
-        r.scrollIntoView({behavior:'smooth',block:'start'});
-      }).catch(function(){go.disabled=false;e.textContent='Could not reach the server. Try again.';});
-      return;
-    }
-    r.innerHTML=(S.demoMode?'<span class="pill">Demo</span> ':'')+'<div class="eb">'+M.kind+' '+esc(id.replace(/[<>&]/g,''))+'</div><h2 style="margin:6px 0 14px">'+esc(M.title)+'</h2>'+drawSteps(M.steps,M.now)+'<div class="note"><b>Please note</b>'+M.note.map(function(n){return '<p>'+esc(n)+'</p>'}).join('')+'</div><div class="rate"><span>How was your experience?</span><div>'+['Bad','Ok','Good'].map(function(x){return '<button type="button" aria-pressed="false">'+x+'</button>'}).join('')+'</div></div>';
-    r.querySelector('.rate')&&r.querySelector('.rate').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',String(x===b))})});
-    r.scrollIntoView({behavior:'smooth',block:'start'});
+    lookup(mode,id,ph);
   });
+  document.querySelector('.tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setMode(b.dataset.t)});
+  // restore last lookup after a page refresh
   var qp=new URLSearchParams(location.search), t=qp.get('t');
-  if(t==='return')setMode('return');
+  if(t==='return')setMode('return'); else setMode('order');
+  var saved=null; try{saved=JSON.parse(sessionStorage.getItem('sinila-track')||'null')}catch(e){}
   if(qp.get('id')){
-    if(!t)setMode('order');
-    $('#id').value=qp.get('id');
-    $('#ph').value=qp.get('phone')||'';
+    if(t!=='return')setMode('order');
+    $('#id').value=qp.get('id'); $('#ph').value=qp.get('phone')||'';
     if(/^[6-9]\d{9}$/.test((qp.get('phone')||'').replace(/\D/g,''))) $('#form').dispatchEvent(new Event('submit',{cancelable:true}));
+  } else if(saved){
+    setMode(saved.mode); $('#id').value=saved.id; $('#ph').value=saved.phone;
+    lookup(saved.mode,saved.id,saved.phone);
   }
 })();
 </script>
