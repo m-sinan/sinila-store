@@ -40,17 +40,18 @@
   .tabs{display:flex;gap:8px;margin-top:16px;background:var(--soft);padding:4px;border-radius:99px}
   .tabs button{flex:1;border:0;background:transparent;color:var(--muted);padding:10px;border-radius:99px;font-weight:600;cursor:pointer;font-size:14px}
   .tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
-  .tl{display:grid;grid-template-columns:repeat(4,1fr);margin:20px 0 8px}
-  .tl .s{position:relative;text-align:center;font-size:12px;color:var(--muted);padding:0 2px;min-width:0}
-  .tl .s::after{content:"";position:absolute;top:10px;left:50%;width:100%;height:2px;background:var(--line);z-index:0}
-  .tl .s:last-child::after{display:none}
-  .tl .s.done::after{background:var(--green)}
-  .tl .s .dot{position:relative;z-index:1;width:22px;height:22px;border-radius:50%;background:var(--line);margin:0 auto 8px;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700}
-  .tl .s.done .dot{background:var(--green)}
-  .tl .s.now .dot{background:var(--ink);box-shadow:0 0 0 4px var(--soft)}
-  .tl .s b{display:block;color:var(--ink);font-size:12px;line-height:1.3;min-height:31px}
-  .tl .s.now b{color:var(--ink)}
-  .tl .s .d{display:block;margin-top:4px;font-size:12px;color:var(--muted)}
+  .simple{list-style:none;margin:6px 0 0;padding:0}
+  .simple li{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+  .simple li .l{display:flex;align-items:center;gap:12px}
+  .simple li .d{width:12px;height:12px;border-radius:50%;background:var(--green)}
+  .simple li.now .d{background:var(--ink)}
+  .simple li.todo .d{background:var(--line)}
+  .simple li b{font-weight:600}
+  .simple li.todo b{color:var(--muted);font-weight:500}
+  .simple li .t{color:var(--muted);font-size:13px}
+  .simple li.todo .t{color:var(--muted)}
+  .info{margin-top:14px;background:var(--soft);border-radius:14px;padding:14px;font-size:13px;color:var(--muted)}
+  .info b{color:var(--ink)}
   .note{background:var(--soft);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
   .note b{display:block;margin-bottom:6px}
   .note p{margin:4px 0;color:var(--muted)}
@@ -91,7 +92,7 @@
     'return':{label:'Request number',ph:'e.g. RT1234',btn:'Track return',kind:'Request',steps:[['Requested','We have your request','06 Oct'],['Checked','Photo reviewed','08 Oct'],['Refund','Started','10 Oct'],['Closed','Done','10 Oct']],names:['Requested','Checked','Refund','Closed'],demoNow:2,demoTitle:'Refund started',demoNote:['Please keep the item ready for pickup','Refund goes to your UPI ID (cash on delivery) or original payment method within 7 working days.']}
   };
   var mode='order', last=null;
-  function drawSteps(list,now){return '<div class="tl">'+list.map(function(s,i){var c=i<now?'done':i===now?'now':'';return '<div class="s '+c+'"><span class="dot">'+(i<now?'✓':'')+'</span><b>'+esc(s[0])+'</b><span class="d">'+esc(s[2])+'</span></div>'}).join('')+'</div>';}
+  function drawSteps(list,now){return '<ul class="simple">'+list.map(function(x,i){var c=i<now?'done':i===now?'now':'todo';return '<li class="'+c+'"><span class="l"><span class="d"></span><b>'+esc(x[0])+'</b></span><span class="t">'+esc(x[2])+'</span></li>'}).join('')+'</ul>';}
   $('#logo').textContent=S.name||'Sinila';
   if(S.demoMode)$('#demoBar').hidden=false;
   $('#copy').textContent='\u00A9 '+new Date().getFullYear()+' '+(S.name||'');
@@ -113,7 +114,7 @@
       now=0;
       if(/closed|delivered|refunded|replaced/.test(sm)) now=3; else if(/refund|replacement|shipped/.test(sm)) now=2; else if(/packed|checking/.test(sm)) now=1;
       title=res.status||'';
-      extra=res.trackingNo?'<p class="muted" style="margin-top:12px">Courier: '+esc(res.courier||'')+' · Tracking no: <b>'+esc(res.trackingNo)+'</b></p>':'';
+      extra=res.trackingNo?'<div class="info"><b>Courier:</b> '+esc(res.courier||'')+'<br><b>Tracking no:</b> '+esc(res.trackingNo)+'</div>':'';
       notes=[];
     }
     var stepsHtml=drawSteps(steps.map(function(st,i){return [names[i],st[1],st[2]]}),now);
