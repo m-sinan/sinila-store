@@ -15,6 +15,11 @@ function setup() {
     sh.getRange(1, 1, 1, SHEETS[name].length).setValues([SHEETS[name]]).setFontWeight('bold');
     sh.setFrozenRows(1);
   });
+  // Dropdowns so the Status column can only take the allowed values
+  var orderStatus = ['Pending confirmation','Confirmed','Packed','Shipped','Delivered','Cancelled'];
+  var returnStatus = ['New','Checking','Replacement shipped','Refund started','Closed'];
+  ss.getSheetByName('Orders').getRange(2, 14, 500, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(orderStatus).build());
+  ss.getSheetByName('Returns').getRange(2, 9, 500, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(returnStatus).build());
   var first = ss.getSheetByName('Sheet1');
   if (first && ss.getSheets().length > 1) ss.deleteSheet(first);
 }
@@ -35,7 +40,7 @@ function doPost(e) {
       var id = 'SN' + String(Date.now()).slice(-6);
       var phone = digits(d.phone);
       if (!/^[6-9]\d{9}$/.test(phone) || clean(d.name).length < 2 || clean(d.pin).length !== 6) return json({ ok: false, message: 'Please check the details.' });
-      ss.getSheetByName('Orders').appendRow([id, new Date(), clean(d.name, 80), phone, clean(d.house, 120), clean(d.road, 160), digits(d.pin), clean(d.city, 80), clean(d.state, 80), clean(d.landmark, 120), pack === 'two' ? '2 bottles' : '1 bottle', pay, total, 'Confirmed', '', '', '', new Date()]);
+      ss.getSheetByName('Orders').appendRow([id, new Date(), clean(d.name, 80), phone, clean(d.house, 120), clean(d.road, 160), digits(d.pin), clean(d.city, 80), clean(d.state, 80), clean(d.landmark, 120), pack === 'two' ? '2 bottles' : '1 bottle', pay, total, 'Pending confirmation', '', '', '', new Date()]);
       return json({ ok: true, id: id, total: total });
     }
     if (d.type === 'return') {
