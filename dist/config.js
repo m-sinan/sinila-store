@@ -23,7 +23,7 @@ window.STORE = {
 
   // Packs shown in the order form. The first one is the main price.
   packs: [
-    { id: 'one', label: '1 bottle', qty: 1, price: 299 },
+    { id: 'one', label: '1 bottle', qty: 1, price: 299, mrp: 349 },
     { id: 'two', label: '2 bottles', qty: 2, price: 599, badge: 'Best value' }
   ],
 
@@ -124,7 +124,7 @@ window.STORE.videos = [
 // ---------- PRODUCTS (add a new item here when you launch it) ----------
 window.STORE.products = [
   { slug: 'oil-sprayer', name: '2-in-1 Glass Oil Sprayer & Pourer', short: 'Spray and pour, 500 ml',
-    price: 299, image: '', status: 'live', badge: 'Best seller' },
+    price: 299, mrp: 349, image: '', status: 'live', badge: 'Best seller' },
   { slug: 'coming-1', name: 'New product', short: 'Coming soon', price: null, image: '', status: 'soon' },
   { slug: 'coming-2', name: 'New product', short: 'Coming soon', price: null, image: '', status: 'soon' },
   { slug: 'coming-3', name: 'New product', short: 'Coming soon', price: null, image: '', status: 'soon' }

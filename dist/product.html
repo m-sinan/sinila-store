@@ -171,6 +171,8 @@
   $('#pname').textContent=P.name||pr.name||'';
   $('#pshort').textContent=P.short||'';
   $('#pprice').textContent=rupee(packs[0].price);
+  function showMrp(p){var m=$('#pmrp');if(p&&p.mrp&&p.mrp>p.price){m.textContent=rupee(p.mrp);m.hidden=false}else{m.hidden=true}}
+  showMrp(packs[0]);
   $('#sPrice').textContent=rupee(packs[0].price);
   $('#tDelivery').textContent=S.deliveryText||'Delivery in 7-10 working days';
   $('#copy').textContent='© '+new Date().getFullYear()+' '+(S.company&&S.company.legalName||S.name||'');
@@ -188,6 +190,7 @@
       return '<label class="opt"><input type="radio" name="pack" value="'+i+'"'+(i===chosen?' checked':'')+'><span><b>'+esc(p.label)+'</b>'+(p.badge?'<span class="tag">'+esc(p.badge)+'</span>':'')+(save>0?'<small>Save '+rupee(save)+'</small>':'')+'</span><b>'+rupee(p.price)+'</b></label>';
     }).join('');
     $('#pprice').textContent=rupee(packs[chosen].price);
+    showMrp(packs[chosen]);
     $('#sPrice').textContent=rupee(packs[chosen].price);
     $('#addBtn').href='order.html?pack='+chosen;
   }
