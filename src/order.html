@@ -174,7 +174,7 @@
     var payload={type:'order',pack:chosen===0?'one':'two',payment:pay==='cod'?'cod':'prepaid',name:v('f-name'),phone:phone,house:v('f-house'),road:v('f-road'),pin:v('f-pin'),city:v('f-city'),state:$('#f-state').value,landmark:v('f-land'),website:''};
     var box=$('#done');
     if(!S.scriptUrl){
-      $('#fa').hidden=true;box.hidden=false;
+      $('#fa').hidden=true;box.hidden=false;document.querySelector('footer').style.display='none';
       box.innerHTML=DEMO?'<div class="eb">Step 3 of 3</div><h2>Demo: no order was sent</h2><p class="muted">Add the web app link in config.js to save orders. Total '+rupee(total)+'.</p>':'<h2>Order received</h2><p>Total '+rupee(total)+'.</p>';
       return;
     }
@@ -182,7 +182,7 @@
       .then(function(r){return r.json()})
       .then(function(res){
         if(!res.ok){btn.disabled=false;btn.textContent=pay==='cod'?'Confirm order':'Pay and place order';err.textContent=res.message||'Please check the details.';return;}
-        $('#fa').hidden=true;
+        $('#fa').hidden=true;document.querySelector('footer').style.display='none';
         var trackUrl='track.html?t=order&id='+encodeURIComponent(res.id)+'&phone='+encodeURIComponent(phone);
         box.hidden=false;
         box.innerHTML='<div class="eb">Step 3 of 3</div><h2>Order received</h2><p>Thank you. Your order number is <b>'+esc(res.id)+'</b>. Total '+rupee(total)+'.</p>';
