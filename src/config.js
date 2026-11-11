@@ -131,9 +131,9 @@ window.STORE.products = [
 ];
 // Short social videos for the horizontal strip. Each product can have its own.
 window.STORE.socialReels = [
-  { title: 'Oil sprayer in action', product: 'oil-sprayer', src: '', poster: '', demo: true },
-  { title: 'Pour mode for tadka', product: 'oil-sprayer', src: '', poster: '', demo: true },
-  { title: 'Kitchen tour', product: 'oil-sprayer', src: '', poster: '', demo: true },
+  { title: 'Use less oil', product: 'oil-sprayer', src: 'video/short1.mp4', poster: '', demo: true },
+  { title: 'Spray, do not pour', product: 'oil-sprayer', src: 'video/short2.mp4', poster: '', demo: true },
+  { title: '2 in 1: spray or pour', product: 'oil-sprayer', src: 'video/short3.mp4', poster: '', demo: true },
   { title: 'Customer reel', product: 'oil-sprayer', src: '', poster: '', demo: true }
 ];
 
