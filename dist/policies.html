@@ -1,0 +1,126 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Policies · Sinila</title></head><body>
+<meta name="description" content="Sinila shipping, returns, privacy and contact information.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{--bg:#FFFFFF;--ink:#1B2320;--muted:#5C6760;--soft:#F2F4F1;--line:#ECEFEA;--green:#4D6B45;--demo-bg:#FFF1C9;--demo-ink:#5E4500;--gut:max(16px,env(safe-area-inset-left,0px))}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--green:#9CC28F;--demo-bg:#3B3213;--demo-ink:#F1D98A}}
+  :root[data-theme="dark"]{--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--green:#9CC28F;--demo-bg:#3B3213;--demo-ink:#F1D98A}
+  *{box-sizing:border-box}[hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+  a{color:var(--green)}
+  h1,h2{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  h1{font-size:1.6rem} h2{font-size:1.1rem;margin-bottom:6px}
+  p{margin:0 0 8px}
+  .wrap{padding-inline:var(--gut);max-width:720px;margin:0 auto}
+  .eb{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+  .demo{background:var(--demo-bg);color:var(--demo-ink);font-size:12px;text-align:center;padding:8px var(--gut)}
+  .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+  .top .in{display:flex;justify-content:space-between;align-items:center;height:60px;padding-inline:var(--gut);max-width:720px;margin:0 auto}
+  .logo{font-weight:800;font-size:22px;letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+  .back{font-size:14px;font-weight:600;color:var(--green);text-decoration:none}
+  .jump{display:flex;gap:8px;overflow-x:auto;padding:14px var(--gut) 4px;scrollbar-width:none}
+  .jump::-webkit-scrollbar{display:none}
+  .jump a{flex:0 0 auto;background:var(--soft);color:var(--ink);text-decoration:none;font-size:13px;font-weight:600;padding:8px 14px;border-radius:99px}
+  section{padding:22px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:0}
+  ul{margin:8px 0 0;padding-left:1.1rem;display:grid;gap:6px;color:var(--muted)}
+  .card{border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:8px;margin-top:10px}
+  dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:10px 0 0}
+  dt{color:var(--muted)} dd{margin:0}
+  .muted{color:var(--muted)}
+  .fl{display:grid;gap:6px;font-size:13px;font-weight:600}
+  .fl input,.fl select,.fl textarea{width:100%;min-height:48px;padding:10px 14px;font:inherit;font-weight:400;font-size:15px;color:var(--ink);background:var(--bg);border:1.5px solid #C9CFC6;border-radius:14px}
+  footer{padding:24px var(--gut) 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+</style>
+
+<div class="demo" id="demoBar" hidden>Demo page. Ask a lawyer or adviser to check these policies before launch.</div>
+<header class="top"><div class="in">
+  <a class="back" href="index.html">← Shop</a>
+  <a class="logo" href="index.html" id="logo">Sinila</a>
+  <span></span>
+</div></header>
+
+<main class="wrap">
+  <div style="padding-top:20px"><div class="eb">Help</div><h1 style="margin-top:6px">Policies</h1><p class="muted" style="margin-top:6px">Plain answers to the questions customers ask most.</p></div>
+  <nav class="jump" aria-label="Policy sections">
+    <a href="#shipping">Shipping</a><a href="#returns">Returns</a><a href="#privacy">Privacy</a><a href="#contact">Contact</a>
+  </nav>
+
+  <section id="shipping">
+    <div class="eb">Shipping</div>
+    <h2 style="margin-top:6px">Delivery</h2>
+    <p id="ship"></p>
+    <ul>
+      <li>Orders ship within 2 working days after we confirm them.</li>
+      <li>We send a tracking link when your order ships.</li>
+      <li>Cash on delivery is available. We confirm these orders by call or message first.</li>
+      <li>We deliver across India. Shipping is free.</li>
+    </ul>
+  </section>
+
+  <section id="returns">
+    <div class="eb">Returns</div>
+    <h2 style="margin-top:6px">Damaged or faulty</h2>
+    <p>If your bottle arrives broken, leaking or not working, tell us within 48 hours of delivery.</p>
+    <ul>
+      <li>Send a photo or short video of the problem to our phone or email.</li>
+      <li>We replace the bottle, or refund you, at no cost.</li>
+      <li>Refunds go back to the original payment method within 7 working days.</li>
+    </ul>
+    <h2 style="margin-top:22px">Report a problem</h2>
+    <form id="retForm" class="card" novalidate style="margin-top:14px">
+      <p class="muted" style="font-size:13px">Within 48 hours of delivery. We reply within 1 working day.</p>
+      <label class="fl">Name<input id="r-name" autocomplete="name"></label>
+      <label class="fl">Phone number used for the order<input id="r-phone" type="tel" inputmode="numeric" maxlength="10"></label>
+      <label class="fl">What went wrong?
+        <select id="r-type"><option value="">Select</option><option>Broken or cracked</option><option>Leaking</option><option>Not spraying or pouring</option><option>Other</option></select>
+      </label>
+      <label class="fl">UPI ID <span class="muted">(only if you paid cash on delivery, for your refund)</span><input id="r-upi" placeholder="name@bank"></label>
+      <label class="fl">Tell us more <span class="muted">(optional)</span><textarea id="r-msg" rows="3"></textarea></label>
+      <p class="muted" style="font-size:13px">After you submit, we'll ask for a photo or short video on your phone number.</p>
+      <div id="r-err" style="color:var(--err,#B3261E);font-weight:600;min-height:1.3em;font-size:14px"></div>
+      <button class="btn" type="submit" style="background:var(--ink);color:var(--bg);border:0;border-radius:14px;padding:14px;font-weight:700;cursor:pointer">Send request</button>
+      <p id="r-done" hidden style="font-weight:600;color:var(--green)"></p>
+    </form>
+  </section>
+
+  <section id="privacy">
+    <div class="eb">Privacy</div>
+    <h2 style="margin-top:6px">Your details</h2>
+    <p>We use your name, phone number and address only to deliver your order and confirm it with you.</p>
+    <ul>
+      <li>We never sell your details.</li>
+      <li>We keep order records for as long as the law requires.</li>
+      <li>To ask us to delete your details, contact us using the details below.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <div class="eb">Contact</div>
+    <h2 style="margin-top:6px">Talk to us</h2>
+    <div class="card"><dl id="contactList"></dl></div>
+  </section>
+
+</main>
+
+<footer><div id="copy"></div></footer>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var S=window.STORE||{}, C=S.company||{}, $=function(s){return document.querySelector(s)};
+  function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+  $('#logo').textContent=S.name||'Sinila';
+  if(S.demoMode)$('#demoBar').hidden=false;
+  document.title='Policies · '+(S.name||'Sinila');
+  $('#ship').textContent=(S.deliveryText||'Delivery in 7-10 working days')+'.';
+  var rows=[['Phone',C.phone||S.contactPhone],['Email',C.email||S.contactEmail],['Address',C.address],['Hours',C.hours]];
+  $('#contactList').innerHTML=rows.filter(function(r){return r[1]}).map(function(r){return '<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>'}).join('');
+  var demo=!!S.demoMode;
+  $('#retForm').addEventListener('submit',function(ev){ev.preventDefault();var e=$('#r-err');e.textContent='';var ph=$('#r-phone').value.replace(/\D/g,'');if($('#r-name').value.trim().length<2)return e.textContent='Please enter your name.';if(!/^[6-9]\d{9}$/.test(ph))return e.textContent='Please enter the phone number used for the order.';var up=$('#r-upi').value.trim();if(up&&!/^[\w.\-]{2,}@[a-zA-Z]{2,}$/.test(up))return e.textContent='Please check the UPI ID.';if(!$('#r-type').value)return e.textContent='Please choose what went wrong.';$('#retForm').querySelectorAll('input,select,textarea,button').forEach(function(x){x.disabled=true});var d=$('#r-done');d.hidden=false;d.textContent=demo?'Demo: request not sent. Real requests go to your Google Sheet once connected.':'Thank you. We have your request and will reply within 1 working day.';});
+  $('#copy').textContent='© '+new Date().getFullYear()+' '+(C.legalName||S.name||'');
+})();
+</script>
+</body></html>

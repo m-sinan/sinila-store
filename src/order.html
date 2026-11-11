@@ -1,0 +1,173 @@
+<title>Checkout · Sinila</title>
+<meta name="description" content="Place your Sinila order. Pay online or on delivery.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{--bg:#FFFFFF;--ink:#1B2320;--muted:#5C6760;--soft:#F2F4F1;--line:#ECEFEA;--accent:#1B2320;--green:#4D6B45;--demo-bg:#FFF1C9;--demo-ink:#5E4500;--err:#B3261E;--mid:#C9CFC6;--gut:max(16px,env(safe-area-inset-left,0px))}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--accent:#EEF2EC;--green:#9CC28F;--demo-bg:#3B3213;--demo-ink:#F1D98A;--err:#FF9C92;--mid:#3A4A3D}}
+  :root[data-theme="dark"]{--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--accent:#EEF2EC;--green:#9CC28F;--demo-bg:#3B3213;--demo-ink:#F1D98A;--err:#FF9C92;--mid:#3A4A3D}
+  *{box-sizing:border-box}[hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+  a{color:var(--green)}button,input,select{font-family:inherit}
+  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  h1{font-size:1.5rem} h2{font-size:1.1rem}
+  p{margin:0}
+  .wrap{padding-inline:var(--gut);max-width:720px;margin:0 auto}
+  section{padding-block:20px}
+  .eb{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+  .muted{color:var(--muted)}
+  .demo{background:var(--demo-bg);color:var(--demo-ink);font-size:12px;text-align:center;padding:8px var(--gut)}
+  .pill{display:inline-block;background:var(--demo-bg);color:var(--demo-ink);font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px}
+  .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+  .top .in{display:flex;justify-content:space-between;align-items:center;height:60px;padding-inline:var(--gut);max-width:720px;margin:0 auto}
+  .logo{font-weight:800;font-size:22px;letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+  .back{font-size:14px;font-weight:600;color:var(--green);text-decoration:none}
+  .btn{display:flex;align-items:center;justify-content:center;width:100%;background:var(--accent);color:var(--bg);font-weight:700;border-radius:14px;padding:14px 20px;border:0;cursor:pointer;font-size:16px;min-height:52px}
+  .btn[disabled]{opacity:.6}
+  :focus-visible{outline:3px solid var(--green);outline-offset:2px}
+  .steps{display:flex;gap:8px;margin:14px 0 4px;font-size:12px;color:var(--muted)}
+  .steps span{flex:1;padding-top:8px;border-top:3px solid var(--line)}
+  .steps span.on{border-color:var(--green);color:var(--ink);font-weight:700}
+  fieldset{border:0;margin:0;padding:0;display:grid;gap:12px;min-width:0}
+  legend{font-weight:800;font-size:17px;padding:0;margin-bottom:6px;letter-spacing:-.01em}
+  .opt{display:flex;justify-content:space-between;align-items:center;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer;background:var(--bg)}
+  .opt:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .opt input{accent-color:var(--accent);width:18px;height:18px;margin:0 12px 0 0}
+  .opt .l{display:flex;align-items:center;flex:1}
+  .opt small{display:block;color:var(--muted);font-size:12px}
+  .tag{background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;margin-left:6px}
+  .field{display:grid;gap:6px;min-width:0}
+  .field label{font-weight:600;font-size:13px}
+  .field input,.field select{width:100%;min-height:52px;padding:0 14px;font-size:15px;color:var(--ink);background:var(--bg);border:1.5px solid var(--mid);border-radius:14px}
+  .field input:hover,.field select:hover{border-color:var(--green)}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--green)}
+  .grid2{display:grid;gap:12px}
+  @media(min-width:520px){.grid2{grid-template-columns:1fr 1fr}}
+  .sum{background:var(--soft);border-radius:18px;padding:16px;display:grid;gap:8px}
+  .sum div{display:flex;justify-content:space-between;color:var(--muted)}
+  .sum .tot{color:var(--ink);font-weight:800;font-size:19px;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+  .err{color:var(--err);min-height:1.3em;font-size:14px;font-weight:600}
+  .done{background:var(--soft);border-radius:20px;padding:22px;display:grid;gap:10px}
+  .note{font-size:12px;color:var(--muted)}
+  .pack-sum{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+  .chg{border:0;background:var(--soft);color:var(--ink);font-weight:600;padding:9px 14px;border-radius:99px;cursor:pointer}
+  .trust{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--muted);margin-bottom:14px}
+  .trust span{white-space:nowrap}
+  footer{padding:24px var(--gut) 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+</style>
+
+<div class="demo" id="demoBar" hidden>Demo mode: no order is sent. Orders go to your Google Sheet once it is connected.</div>
+<header class="top"><div class="in">
+  <a class="back" href="index.html">← Shop</a>
+  <a class="logo" href="index.html" id="logo">Sinila</a>
+  <span></span>
+</div></header>
+
+<main class="wrap">
+  <div class="steps" aria-label="Checkout steps"><span class="on">Pack</span><span class="on">Details</span><span>Confirm</span></div>
+  <form id="form" novalidate>
+    <div id="fa">
+      <section>
+        <div class="pack-sum">
+          <div><div class="eb">Your pack</div><b id="packName"></b> <span id="packPrice" class="muted"></span></div>
+          <button type="button" class="chg" id="chgBtn" aria-expanded="false" aria-controls="packs">Change</button>
+        </div>
+        <fieldset id="packs" hidden style="margin-top:12px">
+          <legend>Choose a different pack</legend>
+          <div id="packList" style="display:grid;gap:10px"></div>
+        </fieldset>
+      </section>
+      <section>
+        <fieldset>
+          <legend>How will you pay?</legend>
+          <div id="pays" style="display:grid;gap:10px"></div>
+        </fieldset>
+      </section>
+      <section>
+        <fieldset>
+          <legend>Your details</legend>
+          <div class="field"><label for="f-name">Name</label><input id="f-name" autocomplete="name"></div>
+          <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10 digit mobile number"></div>
+        </fieldset>
+      </section>
+      <section>
+        <fieldset>
+          <legend>Delivery address</legend>
+          <div class="field"><label for="f-house">House no. / Building name</label><input id="f-house" autocomplete="address-line1"></div>
+          <div class="field"><label for="f-road">Road name / Area / Colony</label><input id="f-road" autocomplete="address-line2"></div>
+          <div class="grid2">
+            <div class="field"><label for="f-pin">Pin code</label><input id="f-pin" inputmode="numeric" maxlength="6" autocomplete="postal-code"></div>
+            <div class="field"><label for="f-city">City</label><input id="f-city" autocomplete="address-level2"></div>
+          </div>
+          <div class="field"><label for="f-state">State</label><select id="f-state" autocomplete="address-level1"><option value="">Select state</option></select></div>
+          <div class="field"><label for="f-land">Landmark <span class="muted" style="font-weight:400">(optional)</span></label><input id="f-land"></div>
+        </fieldset>
+      </section>
+      <section>
+        <div class="trust"><span>✓ Cash on delivery</span><span>✓ Replacement if damaged</span><span>✓ 7-10 day delivery</span></div>
+        <div class="sum" id="sum"></div>
+        <p class="note" style="margin-top:10px" id="note"></p>
+      </section>
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn" type="submit" id="submit">Place order</button>
+      <p class="note" style="margin-top:12px">We call or message you to confirm before shipping. Your details are used only for this order. See our <a href="policies.html">policies</a>.</p>
+    </div>
+    <div class="done" id="done" hidden></div>
+  </form>
+</main>
+
+<footer><div id="copy"></div></footer>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var S=window.STORE||{}, DEMO=!!S.demoMode, $=function(s){return document.querySelector(s)};
+  function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+  function rupee(n){return '₹'+Number(n).toLocaleString('en-IN')}
+  var packs=S.packs||[{id:'one',label:'1 bottle',qty:1,price:349}], prepaid=S.prepaidDiscount||0, advance=S.codAdvance||0;
+  var q=new URLSearchParams(location.search), chosen=Math.min(packs.length-1,Math.max(0,+(q.get('pack')||0))), pay='prepaid';
+
+  $('#logo').textContent=S.name||'Sinila';
+  if(DEMO)$('#demoBar').hidden=false;
+  $('#copy').textContent='© '+new Date().getFullYear()+' '+(S.company&&S.company.legalName||S.name||'');
+  $('#f-state').insertAdjacentHTML('beforeend',['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal','Andaman and Nicobar Islands','Chandigarh','Dadra and Nagar Haveli and Daman and Diu','Delhi','Jammu and Kashmir','Ladakh','Lakshadweep','Puducherry'].map(function(s){return '<option>'+s+'</option>'}).join(''));
+
+  function draw(){
+    $('#packList').innerHTML=packs.map(function(p,i){
+      var save=i>0?packs[0].price*p.qty-p.price:0;
+      return '<label class="opt"><span class="l"><input type="radio" name="pack" value="'+i+'"'+(i===chosen?' checked':'')+'><span><b>'+esc(p.label)+'</b>'+(p.badge?'<span class="tag">'+esc(p.badge)+'</span>':'')+(save>0?'<small>Save '+rupee(save)+'</small>':'')+'</span></span><b>'+rupee(p.price)+'</b></label>';
+    }).join('');
+    $('#packName').textContent=packs[chosen].label;
+    $('#packPrice').textContent=rupee(packs[chosen].price);
+    $('#pays').innerHTML='<label class="opt"><span class="l"><input type="radio" name="pay" value="prepaid"'+(pay==='prepaid'?' checked':'')+'><span><b>Pay online</b><small>UPI, card or net banking</small></span></span><span class="tag">Save '+rupee(prepaid)+'</span></label>'+
+      '<label class="opt"><span class="l"><input type="radio" name="pay" value="cod"'+(pay==='cod'?' checked':'')+'><span><b>Cash on delivery</b><small>'+(advance>0?'Pay '+rupee(advance)+' online now to confirm, the rest on delivery.':'Pay when your order arrives.')+'</small></span></span></label>';
+    var p=packs[chosen], d=pay==='prepaid'?prepaid:0;
+    $('#sum').innerHTML='<div><span>'+esc(p.label)+'</span><span>'+rupee(p.price)+'</span></div>'+(d?'<div><span>Online discount</span><span>−'+rupee(d)+'</span></div>':'')+
+      '<div><span>Delivery</span><span>'+(S.shippingNote?'Free':'At actual')+'</span></div><div class="tot"><span>Total</span><span>'+rupee(p.price-d)+'</span></div>';
+    $('#note').textContent=pay==='cod'&&advance>0?'You pay '+rupee(advance)+' now. The rest is due on delivery.':'';
+    $('#submit').textContent=pay==='cod'?'Confirm order':'Pay '+rupee(p.price-d)+' and place order';
+  }
+  $('#chgBtn').addEventListener('click',function(){var box=$('#packs');var open=box.hidden;box.hidden=!open;this.setAttribute('aria-expanded',String(open));this.textContent=open?'Done':'Change'});
+  $('#form').addEventListener('change',function(e){if(e.target.name==='pack')chosen=+e.target.value;if(e.target.name==='pay')pay=e.target.value;if(e.target.name)draw()});
+  draw();
+
+  $('#form').addEventListener('submit',function(ev){
+    ev.preventDefault();var err=$('#err');err.textContent='';
+    var v=function(id){return $('#'+id).value.trim()}, phone=v('f-phone').replace(/\D/g,'');
+    if(v('f-name').length<2)return err.textContent='Please enter your name.';
+    if(!/^[6-9]\d{9}$/.test(phone))return err.textContent='Please enter a valid 10 digit mobile number.';
+    if(v('f-house').length<2)return err.textContent='Please enter your house number or building name.';
+    if(v('f-road').length<3)return err.textContent='Please enter your road name, area or colony.';
+    if(!/^[1-9]\d{5}$/.test(v('f-pin')))return err.textContent='Please enter a valid 6 digit pin code.';
+    if(v('f-city').length<2)return err.textContent='Please enter your city.';
+    if(!$('#f-state').value)return err.textContent='Please select your state.';
+    var total=packs[chosen].price-(pay==='prepaid'?prepaid:0);
+    $('#fa').hidden=true;var box=$('#done');box.hidden=false;
+    box.innerHTML=DEMO
+      ?'<div class="eb">Step 3 of 3</div><h2>Demo: no order was sent</h2><p class="muted">This is how the confirmation looks. Total '+rupee(total)+'.</p><span class="pill">Demo</span>'
+      :'<div class="eb">Step 3 of 3</div><h2>Order received</h2><p>Thank you. We will call or message you on '+esc(phone)+' to confirm. Total '+rupee(total)+'.</p>';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>

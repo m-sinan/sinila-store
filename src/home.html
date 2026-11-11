@@ -1,0 +1,190 @@
+<title>Sinila · Kitchen helpers</title>
+<meta name="description" content="Sinila kitchen helpers for small homes. Cash on delivery available.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{--bg:#FFFFFF;--ink:#1B2320;--muted:#5C6760;--soft:#F2F4F1;--line:#ECEFEA;--accent:#1B2320;--green:#4D6B45;--tint:#DDE8D6;--cream:#F6F1DF;--demo-bg:#FFF1C9;--demo-ink:#5E4500;--gut:max(16px,env(safe-area-inset-left,0px))}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--accent:#EEF2EC;--green:#9CC28F;--tint:#22301F;--cream:#26301E;--demo-bg:#3B3213;--demo-ink:#F1D98A}}
+  :root[data-theme="dark"]{--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--accent:#EEF2EC;--green:#9CC28F;--tint:#22301F;--cream:#26301E;--demo-bg:#3B3213;--demo-ink:#F1D98A}
+  *{box-sizing:border-box}[hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img,video{display:block;max-width:100%}
+  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  h1{font-size:clamp(1.8rem,6vw,2.6rem)} h2{font-size:clamp(1.25rem,4vw,1.6rem)}
+  p{margin:0}
+  .wrap{padding-inline:var(--gut);max-width:1100px;margin:0 auto}
+  section{padding-block:28px}
+  .eb{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+  .muted{color:var(--muted)}
+  .demo{background:var(--demo-bg);color:var(--demo-ink);font-size:12px;text-align:center;padding:8px var(--gut)}
+  .pill{display:inline-block;background:var(--demo-bg);color:var(--demo-ink);font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;letter-spacing:.04em}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--bg);font-weight:700;border-radius:14px;padding:13px 20px;border:0;cursor:pointer;font-size:15px;min-height:48px}
+  .btn.ghost{background:var(--soft);color:var(--ink)}
+  :focus-visible{outline:3px solid var(--green);outline-offset:2px}
+  .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+  .top .in{display:flex;justify-content:space-between;align-items:center;height:60px;padding-inline:var(--gut);max-width:1100px;margin:0 auto}
+  .logo{font-weight:800;font-size:22px;letter-spacing:-.03em}
+  .icons{display:flex;gap:8px}
+  .ic{width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;border:0;cursor:pointer;color:var(--ink);font-size:16px}
+  .search{margin:14px var(--gut) 0;background:var(--soft);border-radius:14px;padding:12px 14px;color:var(--muted);font-size:14px;max-width:1100px;margin-inline:auto;display:block}
+  .search{margin-inline:var(--gut)}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:14px var(--gut) 2px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;padding:8px 15px;border-radius:99px;background:var(--soft);font-size:13px;font-weight:600;border:0;color:var(--ink);cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+
+  .feat{margin:14px var(--gut) 0;border-radius:20px;background:var(--soft);padding:16px;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center}
+  @media(min-width:760px){.feat{grid-template-columns:1fr 240px;padding:28px;max-width:1100px;margin-inline:auto;gap:28px}}
+  .feat .eb{color:var(--green)}
+  .feat h1{font-size:1.35rem;margin-top:6px}
+  .feat p{color:var(--muted);margin:6px 0 12px;font-size:14px}
+  .feat .img{background:var(--bg);border-radius:16px;aspect-ratio:1;display:grid;place-items:center;color:var(--muted);font-size:11px;text-align:center;padding:10px}
+  .feat .btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  button,input{font-family:inherit}
+  .price{font-weight:800;font-size:20px;margin-right:6px}
+
+  .sec-h{display:flex;justify-content:space-between;align-items:end;padding:0 var(--gut);margin-bottom:14px;gap:12px}
+  .sec-h a{color:var(--green);font-weight:600;font-size:14px}
+  .grid{display:grid;gap:12px;grid-template-columns:1fr 1fr;padding-inline:var(--gut)}
+  @media(min-width:760px){.grid{grid-template-columns:repeat(4,1fr)}}
+  .pc{border:1px solid var(--line);border-radius:18px;padding:10px;display:grid;gap:4px;align-content:start;position:relative;background:var(--bg)}
+  .pc .img{background:var(--soft);border-radius:14px;aspect-ratio:1/.9;display:grid;place-items:center;color:var(--muted);font-size:12px}
+  .pc b{font-size:14px;margin-top:6px}
+  .pc small{color:var(--muted);font-size:12px}
+  .pc .row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+  .pc .pr{font-weight:800}
+  .add{width:34px;height:34px;border-radius:12px;background:var(--accent);color:var(--bg);display:grid;place-items:center;font-size:20px;border:0;cursor:pointer;text-decoration:none}
+  .soon{font-size:11px;background:var(--soft);color:var(--muted);padding:4px 8px;border-radius:99px;font-weight:600}
+  .pc.off{opacity:.85}
+
+  .reels{display:flex;gap:10px;overflow-x:auto;padding:0 var(--gut) 6px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reel{flex:0 0 150px;aspect-ratio:9/16;border-radius:18px;overflow:hidden;position:relative;background:linear-gradient(160deg,var(--tint),var(--cream));scroll-snap-align:start;display:grid}
+  .reel video,.reel .ph{width:100%;height:100%;object-fit:cover;grid-area:1/1}
+  .reel .ph{display:grid;place-items:center;text-align:center;padding:14px;color:var(--muted);font-size:12px}
+  .reel .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 10px;background:linear-gradient(transparent,#000c);color:#fff;font-size:12px;font-weight:600;z-index:2}
+  .reel .pill{position:absolute;top:8px;left:8px;z-index:2}
+  .seg{display:flex;gap:6px;overflow-x:auto;padding:0 var(--gut) 14px;scrollbar-width:none}
+  .seg button{flex:0 0 auto;border:0;background:var(--soft);color:var(--ink);padding:8px 13px;border-radius:99px;font:600 13px Inter;cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--green);color:#fff}
+
+  .info{display:grid;gap:14px}
+  @media(min-width:760px){.info{grid-template-columns:1fr 1fr;align-items:center}}
+  .card{border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:8px}
+  .map{aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--soft);display:grid;place-items:center;color:var(--muted);text-align:center;padding:16px}
+  .map iframe{width:100%;height:100%;border:0}
+  dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0}
+  dt{color:var(--muted)} dd{margin:0}
+
+  .cart{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom,0px));gap:12px}
+  .cart small{display:block;color:var(--muted);font-size:12px}
+  footer{padding:32px var(--gut) 120px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+  footer .links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+</style>
+
+<div class="demo" id="demoBar" hidden>Demo content: photos, videos and prices are placeholders until launch.</div>
+<header class="top"><div class="in">
+  <span class="logo" id="logo">Sinila</span>
+  <div class="icons"><button class="ic" aria-label="Search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button><a class="ic" href="order.html" aria-label="Cart">🛒</a></div>
+</div></header>
+
+<main>
+  <div class="search" role="search">Search kitchen helpers</div>
+  <div class="chips" id="chips" role="group" aria-label="Categories"></div>
+
+  <div class="feat">
+    <div>
+      <div class="eb">Best seller</div>
+      <h1>Use less oil. Keep the flavour.</h1>
+      <p>2-in-1 glass sprayer and pourer, 500 ml.</p>
+      <div class="btns"><a class="btn" href="product.html?p=oil-sprayer">Shop now</a><span class="price" id="featPrice"></span></div>
+    </div>
+    <div class="img" id="featImg">Featured product photo</div>
+  </div>
+
+  <section>
+    <div class="sec-h"><h2>Kitchen helpers</h2><a href="#" onclick="return false">See all</a></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><div><div class="eb">Watch on social</div><h2 style="margin-top:4px">See our products in action</h2></div></div>
+    <div class="seg" id="langs" role="group" aria-label="Video language"></div>
+    <div class="reels" id="reels"></div>
+    <p class="muted" style="padding:8px var(--gut) 0;font-size:12px">Swipe sideways →</p>
+  </section>
+
+  <section>
+    <div class="sec-h"><h2>Visit us</h2></div>
+    <div class="wrap info">
+      <div class="card" id="contact"></div>
+      <div class="map" id="map"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="links"><a href="policies.html#shipping">Shipping</a><a href="policies.html#returns">Returns</a><a href="policies.html#privacy">Privacy</a><a href="policies.html#contact">Contact</a></div>
+  <div id="copy"></div>
+</footer>
+
+<div class="cart" id="cart">
+  <div><b id="cartTotal">₹349</b><small>1 item in your order</small></div>
+  <a class="btn" href="order.html">Checkout</a>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var S=window.STORE||{}, DEMO=!!S.demoMode, $=function(s){return document.querySelector(s)};
+  function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+  function rupee(n){return '₹'+Number(n).toLocaleString('en-IN')}
+  function safe(u){u=String(u||'').trim();return /^(https?:\/\/|[\w\-./]+$)/i.test(u)?u:''}
+  var C=S.company||{}, prods=S.products||[], live=prods.filter(function(p){return p.status==='live'}), feat=live[0]||prods[0]||{};
+
+  $('#logo').textContent=S.name||'Sinila';
+  if(DEMO)$('#demoBar').hidden=false;
+  document.title=(S.name||'Sinila')+' · Kitchen helpers';
+  $('#featPrice').textContent=feat.price?rupee(feat.price):'';
+  $('#cartTotal').textContent=feat.price?rupee(feat.price):'';
+  $('#copy').textContent='© '+new Date().getFullYear()+' '+(C.legalName||S.name||'');
+
+  // categories (simple: all + one per product type)
+  var chips=['All','Oil sprayers','Storage','Gadgets','New'];
+  $('#chips').innerHTML=chips.map(function(c,i){return '<button class="chip" aria-pressed="'+(i===0)+'">'+esc(c)+'</button>'}).join('');
+  $('#chips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;[].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',x===b)})});
+
+  // product grid
+  $('#grid').innerHTML=prods.map(function(p){
+    var img=safe(p.image);
+    var inner='<div class="img">'+(img?'<img src="'+esc(img)+'" alt="'+esc(p.name)+'" style="width:100%;height:100%;object-fit:cover;border-radius:14px">':'Product photo')+'</div>';
+    if(p.status==='live') return '<a class="pc" href="product.html?p='+esc(p.slug)+'">'+inner+'<b>'+esc(p.name)+'</b><small>'+esc(p.short||'')+'</small><div class="row"><span class="pr">'+rupee(p.price)+'</span><span class="add" aria-hidden="true">+</span></div></a>';
+    return '<div class="pc off">'+inner+'<b>'+esc(p.name)+'</b><small>'+esc(p.short||'')+'</small><div class="row"><span class="soon">Soon</span></div></div>';
+  }).join('');
+
+  // social reels with language toggle
+  var LANGS=S.languages||[{code:'en',label:'English'}], lang=LANGS[0].code;
+  try{var sv=localStorage.getItem('sinila-lang');if(sv&&LANGS.some(function(l){return l.code===sv}))lang=sv}catch(e){}
+  $('#langs').innerHTML=LANGS.map(function(l){return '<button type="button" data-l="'+esc(l.code)+'">'+esc(l.label)+'</button>'}).join('');
+  function drawReels(){
+    var list=(S.socialReels||[]).filter(function(r){return DEMO||!r.demo});
+    $('#reels').innerHTML=list.map(function(r){
+      var src=safe(r.src), poster=safe(r.poster);
+      var body=src?'<video src="'+esc(src)+'" controls playsinline preload="metadata"'+(poster?' poster="'+esc(poster)+'"':'')+'></video>':'<div class="ph">'+(DEMO?'Demo reel':'Reel')+'<br>Add video in config.js</div>';
+      return '<div class="reel">'+body+(r.demo?'<span class="pill">Demo</span>':'')+'<div class="cap">'+esc(r.title||'')+'</div></div>';
+    }).join('');
+    [].forEach.call($('#langs').children,function(b){b.setAttribute('aria-pressed',b.dataset.l===lang)});
+  }
+  $('#langs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;lang=b.dataset.l;try{localStorage.setItem('sinila-lang',lang)}catch(x){}drawReels()});
+  drawReels();
+
+  // visit us
+  var rows=[['Address',C.address],['Phone',C.phone],['Email',C.email],['Hours',C.hours]];
+  $('#contact').innerHTML='<h2>'+esc(C.name||S.name||'')+'</h2><dl>'+rows.filter(function(r){return r[1]}).map(function(r){return '<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>'}).join('')+'</dl>';
+  var mu=safe(C.mapEmbedUrl);
+  $('#map').innerHTML=/^https:\/\//.test(mu)?'<iframe src="'+esc(mu)+'" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Our location"></iframe>':'<div><b>Map appears here</b><br><span class="muted" style="font-size:12px">Add your Google Maps link in config.js</span></div>';
+})();
+</script>

@@ -1,0 +1,210 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Product · Sinila</title></head><body>
+<meta name="description" content="Sinila product details, pack options and customer reviews.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{--bg:#FFFFFF;--ink:#1B2320;--muted:#5C6760;--soft:#F2F4F1;--line:#ECEFEA;--accent:#1B2320;--green:#4D6B45;--tint:#DDE8D6;--cream:#F6F1DF;--demo-bg:#FFF1C9;--demo-ink:#5E4500;--gut:max(16px,env(safe-area-inset-left,0px))}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--accent:#EEF2EC;--green:#9CC28F;--tint:#22301F;--cream:#26301E;--demo-bg:#3B3213;--demo-ink:#F1D98A}}
+  :root[data-theme="dark"]{--bg:#101512;--ink:#EEF2EC;--muted:#A4AEA6;--soft:#18201B;--line:#26302A;--accent:#EEF2EC;--green:#9CC28F;--tint:#22301F;--cream:#26301E;--demo-bg:#3B3213;--demo-ink:#F1D98A}
+  *{box-sizing:border-box}[hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden;padding-bottom:96px}
+  a{color:inherit;text-decoration:none}button,input{font-family:inherit}
+  img,video{display:block;max-width:100%}
+  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  h1{font-size:1.6rem} h2{font-size:1.25rem}
+  p{margin:0}
+  .wrap{padding-inline:var(--gut);max-width:1100px;margin:0 auto}
+  section{padding-block:24px}
+  .eb{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+  .muted{color:var(--muted)}
+  .demo{background:var(--demo-bg);color:var(--demo-ink);font-size:12px;text-align:center;padding:8px var(--gut)}
+  .pill{display:inline-block;background:var(--demo-bg);color:var(--demo-ink);font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;letter-spacing:.04em}
+  .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:var(--bg);font-weight:700;border-radius:14px;padding:13px 20px;border:0;cursor:pointer;font-size:15px;min-height:48px}
+  .btn.ghost{background:var(--soft);color:var(--ink)}
+  :focus-visible{outline:3px solid var(--green);outline-offset:2px}
+  .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+  .top .in{display:flex;justify-content:space-between;align-items:center;height:60px;padding-inline:var(--gut);max-width:1100px;margin:0 auto}
+  .logo{font-weight:800;font-size:22px;letter-spacing:-.03em}
+  .back{font-size:14px;font-weight:600;color:var(--green)}
+  .ic{width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;color:var(--ink)}
+
+  .hero{display:grid;gap:22px}
+  @media(min-width:860px){.hero{grid-template-columns:1fr 1fr;gap:48px;align-items:start}}
+  .gallery .main{background:var(--soft);border-radius:22px;aspect-ratio:1;display:grid;place-items:center;color:var(--muted);font-size:13px;text-align:center;padding:20px;position:relative;overflow:hidden}
+  .gallery .main img{width:100%;height:100%;object-fit:cover}
+  .gallery .main .pill{position:absolute;top:12px;left:12px}
+  .thumbs{display:flex;gap:8px;margin-top:10px}
+  .thumbs button{width:60px;height:60px;border-radius:12px;border:2px solid transparent;background:var(--soft);padding:0;cursor:pointer}
+  .thumbs button[aria-current="true"]{border-color:var(--accent)}
+  .buy{display:grid;gap:14px;align-content:start}
+  .price{font-weight:800;font-size:26px}
+  .was{color:var(--muted);text-decoration:line-through;font-size:15px;margin-left:8px}
+  .lead{color:var(--muted)}
+  .packs{display:grid;gap:10px}
+  .opt{display:flex;justify-content:space-between;align-items:center;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer;background:var(--bg)}
+  .opt:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .opt small{display:block;color:var(--muted);font-size:12px}
+  .tag{background:var(--green);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;margin-left:6px;vertical-align:2px}
+  .trust{display:grid;gap:8px;font-size:13px;color:var(--muted)}
+  .trust div::before{content:"✓";color:var(--green);font-weight:700;margin-right:8px}
+  .cta{width:100%}
+
+  .card{border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:8px}
+  .specs{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:0}
+  .specs dt{color:var(--muted)} .specs dd{margin:0}
+  .cmp{display:grid;gap:12px;margin-top:12px}
+  .bar-row{display:grid;grid-template-columns:90px 1fr 56px;gap:10px;align-items:center;font-size:13px}
+  .bar{height:12px;background:var(--soft);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--green);border-radius:99px}
+  .bar-row.pour .bar i{background:#D7A63A}
+  .bar-row b{text-align:right}
+
+  .yt{aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#1B2320;position:relative;display:grid;place-items:center}
+  .yt video,.yt iframe{width:100%;height:100%;border:0;object-fit:cover}
+  .yt .ph{color:#fff;text-align:center;padding:16px;font-size:13px}
+  .yt .ph::before{content:"▶";display:block;font-size:34px;margin-bottom:6px}
+  .yt .pill{position:absolute;top:10px;left:10px}
+  .rv-sum{display:flex;align-items:center;gap:14px;background:var(--soft);border-radius:18px;padding:16px;margin-bottom:12px}
+  .rv-sum .big{font-weight:800;font-size:34px}
+  .stars{color:#C8921A;letter-spacing:2px}
+  .rv{border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:6px;margin-bottom:10px}
+  .rv small{color:var(--muted);font-size:12px}
+  .tag2{font-size:11px;color:var(--green);font-weight:600}
+
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom,0px))}
+  .sticky small{display:block;color:var(--muted);font-size:12px}
+  footer{padding:28px var(--gut) 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+</style>
+
+<div class="demo" id="demoBar" hidden>Demo content: photos, videos, reviews and numbers are placeholders until launch.</div>
+<header class="top"><div class="in">
+  <a class="back" href="index.html">← Back</a>
+  <a class="logo" href="index.html" id="logo">Sinila</a>
+  <a class="ic" href="order.html" aria-label="Cart"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20.5" r="1.2"/><circle cx="17" cy="20.5" r="1.2"/></svg></a>
+</div></header>
+
+<main>
+  <section class="wrap hero" style="padding-bottom:12px">
+    <div class="gallery">
+      <div class="main" id="main"></div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+    <div class="buy">
+      <div class="eb" id="cat">Oil sprayers</div>
+      <h1 id="pname">Product</h1>
+      <p class="lead" id="pshort"></p>
+      <div><span class="price" id="pprice"></span><span class="was" id="pmrp" hidden></span></div>
+      <div class="packs" id="packs"></div>
+      <a class="btn cta" href="order.html" id="addBtn">Add to order</a>
+      <div class="trust">
+        <div>Cash on delivery available</div>
+        <div id="tDelivery">Delivery in 7-10 working days</div>
+        <div>Replacement if it arrives damaged</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="eb">Measured, not guessed</div>
+    <h2 style="margin:6px 0 4px">One pour vs ten sprays</h2>
+    <p class="muted" style="font-size:13px">Same pan, same oil.</p>
+    <div class="cmp" id="cmp"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="eb">Details</div>
+    <div class="card" style="margin-top:10px"><dl class="specs" id="specs"></dl></div>
+  </section>
+
+  <section class="wrap">
+    <div class="eb">From our channel</div>
+    <h2 style="margin:6px 0 12px">Our review of this product</h2>
+    <div class="yt" id="channel"></div>
+  </section>
+
+  <section class="wrap" id="reviews">
+    <div class="eb">Customer reviews</div>
+    <h2 style="margin:6px 0 12px">What buyers say</h2>
+    <div class="rv-sum" id="rvSum"></div>
+    <div id="rvList"></div>
+  </section>
+</main>
+
+<footer>
+  <div id="copy"></div>
+</footer>
+
+<div class="sticky" id="sticky"><div><b id="sPrice"></b><small>Free delivery across India</small></div><a class="btn" href="order.html">Add to order</a></div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var S=window.STORE||{}, DEMO=!!S.demoMode, $=function(s){return document.querySelector(s)};
+  function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+  function rupee(n){return '₹'+Number(n).toLocaleString('en-IN')}
+  function safe(u){u=String(u||'').trim();return /^(https?:\/\/|[\w\-./]+$)/i.test(u)?u:''}
+  var slug=new URLSearchParams(location.search).get('p')||'oil-sprayer';
+  var P=(S.products||[]).filter(function(p){return p.slug===slug})[0]||(S.products||[])[0]||{};
+  var pr=S.product||{}, packs=S.packs||[{label:'1 bottle',qty:1,price:P.price||349}], prepaid=S.prepaidDiscount||0;
+  var chosen=0;
+
+  $('#logo').textContent=S.name||'Sinila';
+  if(DEMO)$('#demoBar').hidden=false;
+  document.title=(P.name||'Product')+' · '+(S.name||'Sinila');
+  $('#pname').textContent=P.name||pr.name||'';
+  $('#pshort').textContent=P.short||'';
+  $('#pprice').textContent=rupee(packs[0].price);
+  $('#sPrice').textContent=rupee(packs[0].price);
+  $('#tDelivery').textContent=S.deliveryText||'Delivery in 7-10 working days';
+  $('#copy').textContent='© '+new Date().getFullYear()+' '+(S.company&&S.company.legalName||S.name||'');
+
+  // gallery (product images; placeholder until photos are added)
+  var imgs=(S.images||[]).map(safe).filter(Boolean);
+  $('#main').innerHTML=imgs.length?'<img src="'+esc(imgs[0])+'" alt="'+esc(P.name||'')+'">':(DEMO?'<span class="pill">Demo photo</span>':'')+'<span>Product photo</span>';
+  if(imgs.length>1)$('#thumbs').innerHTML=imgs.map(function(u,i){return '<button aria-current="'+(i===0)+'"><img src="'+esc(u)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></button>'}).join('');
+  else $('#thumbs').hidden=true;
+
+  // packs
+  function drawPacks(){
+    $('#packs').innerHTML=packs.map(function(p,i){
+      var save=i>0?packs[0].price*p.qty-p.price:0;
+      return '<label class="opt"><input type="radio" name="pack" value="'+i+'"'+(i===chosen?' checked':'')+'><span><b>'+esc(p.label)+'</b>'+(p.badge?'<span class="tag">'+esc(p.badge)+'</span>':'')+(save>0?'<small>Save '+rupee(save)+'</small>':'')+'</span><b>'+rupee(p.price)+'</b></label>';
+    }).join('');
+    $('#pprice').textContent=rupee(packs[chosen].price);
+    $('#sPrice').textContent=rupee(packs[chosen].price);
+    $('#addBtn').href='order.html?pack='+chosen;
+  }
+  $('#packs').addEventListener('change',function(e){if(e.target.name==='pack'){chosen=+e.target.value;drawPacks()}});
+  drawPacks();
+
+  // comparison bars (demo numbers)
+  var Q=S.proof||{};
+  if(Q.pourMl&&Q.sprayMl&&(DEMO||!Q.demo)){
+    $('#cmp').innerHTML='<div class="bar-row pour"><span>One pour</span><div class="bar"><i style="width:100%"></i></div><b>'+Q.pourMl+' ml</b></div>'+
+      '<div class="bar-row"><span>10 sprays</span><div class="bar"><i style="width:'+Math.max(4,Math.round(Q.sprayMl/Q.pourMl*100))+'%"></i></div><b>'+Q.sprayMl+' ml</b></div>'+
+      '<p class="muted" style="font-size:12px;margin-top:4px">'+(Q.demo?'<span class="pill">Demo numbers</span> ':'')+'Measured with '+esc(Q.oil||'cooking oil')+'. Results vary.</p>';
+  } else $('#cmp').closest('section').hidden=true;
+
+  // specs
+  var specs=[['Capacity',pr.capacity],['Body',pr.body],['Lid and parts',pr.lid],['In the box',pr.pack],['Origin',pr.origin]];
+  $('#specs').innerHTML=specs.filter(function(x){return x[1]}).map(function(x){return '<dt>'+x[0]+'</dt><dd>'+esc(x[1])+'</dd>'}).join('');
+
+  // channel video
+  var cv=S.channelVideo||{}, yt=/^[\w-]{6,20}$/.test(cv.youtubeId||'')?cv.youtubeId:'', csrc=safe(cv.src);
+  if(yt) $('#channel').innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+esc(yt)+'" title="'+esc(cv.title||'')+'" allow="accelerometer;encrypted-media;picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+  else if(csrc) $('#channel').innerHTML='<video src="'+esc(csrc)+'" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"'+(safe(cv.poster)?' poster="'+esc(safe(cv.poster))+'"':'')+'></video>';
+  else $('#channel').innerHTML='<div class="ph">'+(DEMO?'<span class="pill">Demo video</span><br>':'')+'Our channel review appears here<br><span style="font-size:11px;opacity:.7">Add a YouTube ID in config.js</span></div>';
+
+  // reviews
+  var revs=(S.reviews||[]).filter(function(r){return r&&r.text&&(DEMO||!r.demo)});
+  if(!revs.length){$('#reviews').hidden=true}
+  else{
+    var avg=revs.reduce(function(a,r){return a+(r.stars||5)},0)/revs.length;
+    $('#rvSum').innerHTML='<div class="big">'+avg.toFixed(1)+'</div><div><div class="stars">'+'★'.repeat(Math.round(avg))+'</div><small class="muted">Based on '+revs.length+' reviews</small></div>';
+    $('#rvList').innerHTML=revs.map(function(r){var n=Math.max(1,Math.min(5,r.stars||5));return '<article class="rv"><div class="stars" aria-label="'+n+' out of 5">'+'★'.repeat(n)+'☆'.repeat(5-n)+'</div><p>'+esc(r.text)+'</p><small>'+esc(r.name||'Customer')+(r.city?', '+esc(r.city):'')+' · Verified buyer</small>'+(r.demo?'<span class="pill">Demo review</span>':'')+'</article>'}).join('');
+  }
+})();
+</script>
+</body></html>
