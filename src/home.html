@@ -197,9 +197,10 @@
 
   // customer care
   var care=[];
-  if(C.phone)care.push('<a class="btn ghost" href="tel:'+esc(C.phone.replace(/\s/g,''))+'">Call us</a>');
+  var wa=String(S.whatsapp||C.phone||'').replace(/\D/g,'');
+  if(wa.length===10)wa='91'+wa;
+  if(wa)care.push('<a class="btn" href="https://wa.me/'+esc(wa)+'">WhatsApp us</a>');
   if(C.email)care.push('<a class="btn ghost" href="mailto:'+esc(C.email)+'">Email us</a>');
-  if(S.whatsapp)care.push('<a class="btn" href="https://wa.me/'+esc(S.whatsapp)+'">WhatsApp us</a>');
   $('#care').innerHTML='<p class="muted">Questions about your order, the sprayer or delivery? We are happy to help.</p><div class="btns" style="display:flex;gap:10px;flex-wrap:wrap">'+care.join('')+'</div>';
 })();
 </script>
