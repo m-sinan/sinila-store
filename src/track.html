@@ -52,6 +52,7 @@
   .simple li.todo .t{color:var(--muted)}
   .info{margin-top:14px;background:var(--soft);border-radius:14px;padding:14px;font-size:13px;color:var(--muted)}
   .info b{color:var(--ink)}
+  .info a{color:var(--green);font-weight:600}
   .note{background:var(--soft);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
   .note b{display:block;margin-bottom:6px}
   .note p{margin:4px 0;color:var(--muted)}
@@ -88,11 +89,18 @@
   var S=window.STORE||{}, $=function(s){return document.querySelector(s)};
   function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
   var MODE={
-    order:{label:'Order number',ph:'e.g. SN1234',btn:'Track order',kind:'Order',steps:[['Confirmed','We called you','07 Nov'],['Packed','Ready to ship','08 Nov'],['Shipped','With courier','09 Nov'],['Delivered','Arriving','Soon']],names:['Confirmed','Packed','Shipped','Delivered'],demoNow:2,demoTitle:'Shipped, arriving in 2 to 4 days',demoNote:['Keep your phone nearby','The courier may call before delivery. If you miss it, message us.']},
-    'return':{label:'Request number',ph:'e.g. RT1234',btn:'Track return',kind:'Request',steps:[['Requested','We have your request','06 Oct'],['Checked','Photo reviewed','08 Oct'],['Refund','Started','10 Oct'],['Closed','Done','10 Oct']],names:['Requested','Checked','Refund','Closed'],demoNow:2,demoTitle:'Refund started',demoNote:['Please keep the item ready for pickup','Refund goes to your UPI ID (cash on delivery) or original payment method within 7 working days.']}
+    order:{label:'Order number',ph:'e.g. SN1234',btn:'Track order',kind:'Order',
+      steps:['Order placed','Confirmed','Packed','Shipped','Delivered'],
+      map:{'pending confirmation':0,'confirmed':1,'packed':2,'shipped':3,'delivered':4},
+      demo:{status:'Shipped',now:3,trackingNo:'',courier:'',trackingLink:''},
+      note:'Keep your phone nearby. The courier may call before delivery.'},
+    'return':{label:'Request number',ph:'e.g. RT1234',btn:'Track return',kind:'Request',
+      steps:['Requested','Checked','Refund or replacement','Closed'],
+      map:{'new':0,'checking':1,'replacement shipped':2,'refund started':2,'closed':3},
+      demo:{status:'Refund started',now:2,trackingNo:'',courier:'',trackingLink:''},
+      note:'Refund goes to your UPI ID (cash on delivery) or original payment method within 7 working days.'}
   };
   var mode='order', last=null;
-  function drawSteps(list,now){return '<ul class="simple">'+list.map(function(x,i){var c=i<now?'done':i===now?'now':'todo';return '<li class="'+c+'"><span class="l"><span class="d"></span><b>'+esc(x[0])+'</b></span><span class="t">'+esc(x[2])+'</span></li>'}).join('')+'</ul>';}
   $('#logo').textContent=S.name||'Sinila';
   if(S.demoMode)$('#demoBar').hidden=false;
   $('#copy').textContent='\u00A9 '+new Date().getFullYear()+' '+(S.name||'');
@@ -106,39 +114,50 @@
     var r=$('#result'); r.hidden=false;
     r.innerHTML='<div class="loader"><span class="spin" aria-hidden="true"></span><span>Checking your '+(mode==='return'?'return':'order')+'. This can take a few seconds...</span></div>';
   }
-  function render(id,res){
-    var M=MODE[mode], r=$('#result');
-    var names=M.names, steps=M.steps, now=M.demoNow, title=M.demoTitle, extra='', notes=M.demoNote;
+  function render(id,res,m){
+    var M=MODE[m], r=$('#result'), html;
+    var status, now, extra='', note=M.note, cancelled=false, updated='';
     if(res){
-      var sm=String(res.status||'').toLowerCase();
-      now=0;
-      if(/closed|delivered|refunded|replaced/.test(sm)) now=3; else if(/refund|replacement|shipped/.test(sm)) now=2; else if(/packed|checking/.test(sm)) now=1;
-      title=res.status||'';
-      extra=res.trackingNo?'<div class="info"><b>Courier:</b> '+esc(res.courier||'')+'<br><b>Tracking no:</b> '+esc(res.trackingNo)+'</div>':'';
-      notes=[];
+      status=String(res.status||'');
+      var key=status.toLowerCase().trim();
+      cancelled=key==='cancelled';
+      now=(M.map[key]!==undefined)?M.map[key]:0;
+      updated=res.updated?'Last updated '+esc(String(res.updated).slice(0,10)):'';
+      if(m==='order' && res.trackingNo){
+        extra='<div class="info"><b>Courier:</b> '+esc(res.courier||'')+'<br><b>Tracking no:</b> '+esc(res.trackingNo)+(res.trackingLink&&/^https?:\/\//.test(res.trackingLink)?'<br><a href="'+esc(res.trackingLink)+'" target="_blank" rel="noopener">Track on courier site</a>':'')+'</div>';
+      }
+      if(m==='return' && res.trackingNo){
+        extra='<div class="info"><b>Courier:</b> '+esc(res.courier||'')+'<br><b>Tracking no:</b> '+esc(res.trackingNo)+'</div>';
+      }
+    } else {
+      status=M.demo.status; now=M.demo.now;
     }
-    var stepsHtml=drawSteps(steps.map(function(st,i){return [names[i],st[1],st[2]]}),now);
-    var noteHtml=notes.length?'<div class="note"><b>Please note</b>'+notes.map(function(n){return '<p>'+esc(n)+'</p>'}).join('')+'</div>':'';
-    r.innerHTML=(S.scriptUrl?'':(S.demoMode?'<span class="pill">Demo</span> ':''))+
-      '<div class="rhead"><div><div class="eb">'+M.kind+' '+esc(String(id).replace(/[<>&]/g,''))+'</div><h2 style="margin:6px 0 0">'+esc(title)+'</h2></div>'+
-      '<button type="button" class="refresh" id="refresh" aria-label="Check again">↻ Check again</button></div>'+
-      stepsHtml+extra+noteHtml+
-      (notes.length||!S.scriptUrl?'<div class="rate"><span>How was your experience?</span><div>'+['Bad','Ok','Good'].map(function(x){return '<button type="button" aria-pressed="false">'+x+'</button>'}).join('')+'</div></div>':'');
+    var title=cancelled?(m==='order'?'Order cancelled':'Request cancelled'):status;
+    var list='';
+    if(!cancelled){
+      list='<ul class="simple">'+M.steps.map(function(name,i){var c=i<now?'done':i===now?'now':'todo';return '<li class="'+c+'"><span class="l"><span class="d"></span><b>'+esc(name)+'</b></span></li>'}).join('')+'</ul>';
+    } else {
+      list='<p class="muted" style="margin-top:14px">This '+(m==='order'?'order':'request')+' was cancelled. Message us if you have questions.</p>';
+    }
+    html=(!res&&S.demoMode?'<span class="pill">Demo</span> ':'')+
+      '<div class="rhead"><div><div class="eb">'+M.kind+' '+esc(String(id).replace(/[<>&]/g,''))+'</div><h2 style="margin:6px 0 0">'+esc(title)+'</h2>'+(updated?'<div class="muted" style="font-size:12px;margin-top:4px">'+updated+'</div>':'')+'</div>'+
+      '<button type="button" class="refresh" id="refresh">Check again</button></div>'+
+      list+(cancelled?'':extra)+(cancelled?'':'<div class="note"><b>Please note</b><p>'+esc(note)+'</p></div>');
+    r.innerHTML=html;
     r.scrollIntoView({behavior:'smooth',block:'start'});
     $('#refresh').addEventListener('click',function(){ if(last) lookup(last.mode,last.id,last.phone); });
-    var rate=r.querySelector('.rate'); if(rate)rate.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',String(x===b))})});
   }
   function lookup(m,id,phone){
     last={mode:m,id:id,phone:phone};
     try{sessionStorage.setItem('sinila-track',JSON.stringify(last))}catch(e){}
-    mode=m; var go=$('#go'), btn=$('#refresh');
-    if(!S.scriptUrl){ render(id,null); return; }
-    go.disabled=true; if(btn)btn.disabled=true; showLoader();
+    mode=m; var go=$('#go');
+    if(!S.scriptUrl){ render(id,null,m); return; }
+    go.disabled=true; showLoader();
     var url=S.scriptUrl+'?action=track&kind='+(m==='return'?'return':'order')+'&id='+encodeURIComponent(id)+'&phone='+encodeURIComponent(phone);
     fetch(url).then(function(x){return x.json()}).then(function(res){
       go.disabled=false;
       if(!res.ok){ $('#result').hidden=true; $('#err').textContent=res.message||'Not found.'; return; }
-      $('#err').textContent=''; render(id,res);
+      $('#err').textContent=''; render(id,res,m);
     }).catch(function(){
       go.disabled=false; $('#result').hidden=true; $('#err').textContent='Could not reach the server. Try again.';
     });
@@ -151,12 +170,10 @@
     lookup(mode,id,ph);
   });
   document.querySelector('.tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setMode(b.dataset.t)});
-  // restore last lookup after a page refresh
   var qp=new URLSearchParams(location.search), t=qp.get('t');
-  if(t==='return')setMode('return'); else setMode('order');
+  setMode(t==='return'?'return':'order');
   var saved=null; try{saved=JSON.parse(sessionStorage.getItem('sinila-track')||'null')}catch(e){}
   if(qp.get('id')){
-    if(t!=='return')setMode('order');
     $('#id').value=qp.get('id'); $('#ph').value=qp.get('phone')||'';
     if(/^[6-9]\d{9}$/.test((qp.get('phone')||'').replace(/\D/g,''))) $('#form').dispatchEvent(new Event('submit',{cancelable:true}));
   } else if(saved){
