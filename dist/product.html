@@ -180,6 +180,7 @@
   // gallery (product images; placeholder until photos are added)
   var imgs=(S.images||[]).map(safe).filter(Boolean);
   $('#main').innerHTML=imgs.length?'<img src="'+esc(imgs[0])+'" alt="'+esc(P.name||'')+'">':(DEMO?'<span class="pill">Demo photo</span>':'')+'<span>Product photo</span>';
+  if(imgs.length)$('#main').insertAdjacentHTML('afterend','<p class="muted" style="font-size:12px;margin:8px 2px 0">Images are AI-generated illustrations and may differ from the actual product.</p>');
   if(imgs.length>1)$('#thumbs').innerHTML=imgs.map(function(u,i){return '<button aria-current="'+(i===0)+'"><img src="'+esc(u)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:10px"></button>'}).join('');
   else $('#thumbs').hidden=true;
 
