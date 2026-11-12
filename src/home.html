@@ -54,12 +54,47 @@
 
 .slider{position:relative;margin:14px 0 0;border-radius:20px;overflow:hidden}
   .track{display:flex;transition:transform .6s ease}
-  .slide{flex:0 0 100%;display:block}
-  .slide img{width:100%;height:auto;display:block}
-  .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
-  .dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:#ffffffaa;cursor:pointer;transition:width .3s ease,background .3s ease}
-  .dots button[aria-current="true"]{background:#fff;width:24px}
-  @media(prefers-reduced-motion:reduce){.track{transition:none}}
+  .slide{flex:0 0 100%;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:8px;position:relative;overflow:hidden;min-height:250px;padding:clamp(20px,4vw,52px);color:var(--ink)}
+  .s-green-light{background:#F6F1DF}
+  .s-xmas{background:linear-gradient(135deg,#1F5A3A,#0F3524);color:#fff}
+  .sl-txt{position:relative;z-index:2}
+  .sl-txt>*{display:block;opacity:0;transform:translateY(16px)}
+  .sl-txt .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+  .s-xmas .eb{color:#F7D57A}
+  .sl-txt h2{font-size:clamp(24px,4.4vw,48px);line-height:1.05;margin:8px 0 10px;letter-spacing:-.02em}
+  .sl-txt h2 em{font-style:normal;color:#F7D57A}
+  .sl-txt p{margin:0 0 16px;font-size:clamp(13px,1.8vw,17px);opacity:.85}
+  .pill{display:inline-block;background:var(--ink);color:#fff;font-weight:700;font-size:14px;padding:10px 18px;border-radius:12px}
+  .pill.red{background:#C8302B}
+  .sl-art{position:relative;height:100%;min-height:180px;display:grid;place-items:center}
+  .bottle{width:min(62%,220px);position:relative;z-index:2}
+  .bottle svg{width:100%;height:auto;display:block}
+  .spark{position:absolute;font-size:22px;color:#D7A63A;z-index:1}
+  .sp1{top:12%;left:14%}.sp2{bottom:18%;right:14%}
+  .s-xmas .spark{color:#F7D57A}
+  .snowfield{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .snowfield i{position:absolute;top:-12px;width:7px;height:7px;border-radius:50%;background:#fff;opacity:.85;animation:fall 6s linear infinite}
+  .snowfield i:nth-child(1){left:6%;animation-duration:7s}.snowfield i:nth-child(2){left:18%;animation-delay:1.2s;width:5px;height:5px}
+  .snowfield i:nth-child(3){left:32%;animation-delay:.6s}.snowfield i:nth-child(4){left:46%;animation-delay:2.4s;width:9px;height:9px}
+  .snowfield i:nth-child(5){left:58%;animation-delay:1.8s}.snowfield i:nth-child(6){left:70%;animation-delay:3.2s;width:5px;height:5px}
+  .snowfield i:nth-child(7){left:82%;animation-delay:.3s}.snowfield i:nth-child(8){left:92%;animation-delay:2.7s;width:6px;height:6px}
+  .snowfield i:nth-child(9){left:26%;animation-delay:4s;width:4px;height:4px}.snowfield i:nth-child(10){left:64%;animation-delay:4.6s;width:4px;height:4px}
+  .slide.on .sl-txt>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .slide.on .sl-txt>*:nth-child(2){animation-delay:.12s}.slide.on .sl-txt>*:nth-child(3){animation-delay:.24s}.slide.on .sl-txt>*:nth-child(4){animation-delay:.36s}
+  .slide.on .bottle{animation:float 4s ease-in-out infinite}
+  .slide.on .spark{animation:twinkle 2.4s ease-in-out infinite}
+  .slide.on .sp2{animation-delay:1.2s}
+  .slide.on .pill{animation:pulse 2.2s ease-in-out infinite}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+  @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  @keyframes fall{0%{transform:translateY(0);opacity:0}10%{opacity:.85}100%{transform:translateY(300px);opacity:0}}
+  .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:3}
+  .dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:#00000040;cursor:pointer;transition:width .3s ease,background .3s ease}
+  .dots button[aria-current="true"]{background:var(--ink);width:24px}
+  @media(max-width:600px){.slide{grid-template-columns:1.25fr 1fr;min-height:230px;padding:18px}.sl-art{min-height:140px}.bottle{width:min(70%,160px)}}
+  @media(prefers-reduced-motion:reduce){.track,.slide *{animation:none!important;transition:none!important}.sl-txt>*{opacity:1;transform:none}}
   .feat{margin:14px 0 0;border-radius:20px;background:var(--soft);padding:16px;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center}
   @media(min-width:760px){.feat{grid-template-columns:1fr 240px;padding:28px;gap:28px}}
   .feat .eb{color:var(--green)}
@@ -131,10 +166,18 @@
 
   <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Offers">
     <div class="track">
-      <a class="slide" href="product.html?p=oil-sprayer"><img src="img/banner.png" alt="Sinila 2-in-1 glass oil sprayer and pourer. Use less oil, keep the flavour." width="1200" height="500"></a>
-      <a class="slide" href="product.html?p=oil-sprayer"><img src="img/banner-christmas.png" alt="Christmas offer: 14% off the 2-in-1 glass oil sprayer and pourer, now ₹299." width="1200" height="500"></a>
+      <a class="slide s-green-light" href="product.html?p=oil-sprayer">
+        <div class="sl-txt"><span class="eb">Best seller</span><h2>Use less oil.<br>Keep the flavour.</h2><p>2-in-1 glass sprayer and pourer, 500 ml.</p><span class="cta"><span class="pill">Shop now →</span></span></div>
+        <div class="sl-art"><span class="spark sp1">✦</span><span class="spark sp2">✦</span><div class="bottle"><svg viewBox="0 0 200 240" aria-hidden="true"><rect x="84" y="12" width="32" height="20" rx="4" fill="#1B2320"/><rect x="66" y="30" width="68" height="18" rx="6" fill="#1B2320"/><rect x="60" y="46" width="80" height="170" rx="22" fill="#fff" stroke="#1B2320" stroke-width="4"/><rect x="60" y="150" width="80" height="66" rx="18" fill="#D7A63A"/><rect x="74" y="70" width="8" height="110" rx="4" fill="#fff" opacity=".8"/></svg></div></div>
+      </a>
+      <a class="slide s-xmas" href="product.html?p=oil-sprayer">
+        <div class="snowfield" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="sl-txt"><span class="eb">Christmas offer</span><h2>14% off<br><em>this Christmas</em></h2><p>2-in-1 glass oil sprayer and pourer. ₹299, was ₹349.</p><span class="cta"><span class="pill red">Shop now →</span></span></div>
+        <div class="sl-art"><span class="spark sp1">★</span><div class="bottle"><svg viewBox="0 0 200 240" aria-hidden="true"><rect x="84" y="12" width="32" height="20" rx="4" fill="#1B2320"/><rect x="66" y="30" width="68" height="18" rx="6" fill="#1B2320"/><rect x="60" y="46" width="80" height="170" rx="22" fill="#fff" stroke="#1B2320" stroke-width="4"/><rect x="60" y="150" width="80" height="66" rx="18" fill="#D7A63A"/><rect x="74" y="70" width="8" height="110" rx="4" fill="#fff" opacity=".8"/></svg></div></div>
+      </a>
     </div>
     <div class="dots" id="dots"></div>
+  </div>
   </div>
 
   <section>
@@ -225,7 +268,7 @@
     var sl=document.getElementById('slider');if(!sl)return;
     var track=sl.querySelector('.track'),dots=document.getElementById('dots'),n=track.children.length,i=0,timer=null,x0=null;
     for(var k=0;k<n;k++){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Show offer '+(k+1));dots.appendChild(d)}
-    function show(k){i=(k+n)%n;track.style.transform='translateX('+(-i*100)+'%)';[].forEach.call(dots.children,function(b,j){b.setAttribute('aria-current',j===i?'true':'false')})}
+    function show(k){i=(k+n)%n;track.style.transform='translateX('+(-i*100)+'%)';[].forEach.call(track.children,function(c,j){c.classList.toggle('on',j===i)});[].forEach.call(dots.children,function(b,j){b.setAttribute('aria-current',j===i?'true':'false')})}
     function start(){if(n<2||matchMedia('(prefers-reduced-motion: reduce)').matches)return;stop();timer=setInterval(function(){show(i+1)},5000)}
     function stop(){clearInterval(timer);timer=null}
     dots.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;e.preventDefault();show([].indexOf.call(dots.children,b));start()});
