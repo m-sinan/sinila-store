@@ -52,8 +52,14 @@
   .chip{flex:0 0 auto;padding:8px 15px;border-radius:99px;background:var(--soft);font-size:13px;font-weight:600;border:0;color:var(--ink);cursor:pointer}
   .chip[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
 
-.banner{display:block;margin:14px 0 0;border-radius:20px;overflow:hidden}
-  .banner img{width:100%;height:auto;border-radius:20px}
+.slider{position:relative;margin:14px 0 0;border-radius:20px;overflow:hidden}
+  .track{display:flex;transition:transform .6s ease}
+  .slide{flex:0 0 100%;display:block}
+  .slide img{width:100%;height:auto;display:block}
+  .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
+  .dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:#ffffffaa;cursor:pointer;transition:width .3s ease,background .3s ease}
+  .dots button[aria-current="true"]{background:#fff;width:24px}
+  @media(prefers-reduced-motion:reduce){.track{transition:none}}
   .feat{margin:14px 0 0;border-radius:20px;background:var(--soft);padding:16px;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center}
   @media(min-width:760px){.feat{grid-template-columns:1fr 240px;padding:28px;gap:28px}}
   .feat .eb{color:var(--green)}
@@ -123,7 +129,13 @@
   <div class="search" role="search">Search kitchen helpers</div>
   <div class="chips" id="chips" role="group" aria-label="Categories"></div>
 
-  <a href="product.html?p=oil-sprayer" class="banner"><img src="img/banner.png" alt="Sinila 2-in-1 glass oil sprayer and pourer. Use less oil, keep the flavour." width="1200" height="500"></a>
+  <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Offers">
+    <div class="track">
+      <a class="slide" href="product.html?p=oil-sprayer"><img src="img/banner.png" alt="Sinila 2-in-1 glass oil sprayer and pourer. Use less oil, keep the flavour." width="1200" height="500"></a>
+      <a class="slide" href="product.html?p=oil-sprayer"><img src="img/banner-christmas.png" alt="Christmas offer: 14% off the 2-in-1 glass oil sprayer and pourer, now ₹299." width="1200" height="500"></a>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
 
   <section>
     <div class="sec-h"><h2>Kitchen helpers</h2><a href="#" onclick="return false">See all</a></div>
@@ -208,6 +220,20 @@
   vm.addEventListener('click',function(e){if(e.target===vm||e.target.closest('.x'))closeVm()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&vm.classList.contains('on'))closeVm()});
 
+  // banner carousel: auto slide, pause on hover/touch, swipe on phones
+  (function(){
+    var sl=document.getElementById('slider');if(!sl)return;
+    var track=sl.querySelector('.track'),dots=document.getElementById('dots'),n=track.children.length,i=0,timer=null,x0=null;
+    for(var k=0;k<n;k++){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Show offer '+(k+1));dots.appendChild(d)}
+    function show(k){i=(k+n)%n;track.style.transform='translateX('+(-i*100)+'%)';[].forEach.call(dots.children,function(b,j){b.setAttribute('aria-current',j===i?'true':'false')})}
+    function start(){if(n<2||matchMedia('(prefers-reduced-motion: reduce)').matches)return;stop();timer=setInterval(function(){show(i+1)},5000)}
+    function stop(){clearInterval(timer);timer=null}
+    dots.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;e.preventDefault();show([].indexOf.call(dots.children,b));start()});
+    sl.addEventListener('mouseenter',stop);sl.addEventListener('mouseleave',start);
+    sl.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;stop()},{passive:true});
+    sl.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));start()});
+    show(0);start();
+  })();
   // customer care
   var care=[];
   var wa=String(S.whatsapp||C.phone||'').replace(/\D/g,'');
