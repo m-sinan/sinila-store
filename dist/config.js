@@ -44,7 +44,7 @@ window.STORE = {
   scriptUrl: 'https://script.google.com/macros/s/AKfycbwzWE-OYAlzTL3Tx4ioSJIgW0jVEEahHJk1H2SYFcuvnvAt-KWwZA5wao45iPG3ffIa1w/exec',
 
   // ---- REAL content goes here when your sample arrives ----
-  images: [],        // e.g. ['img/1.jpg', 'img/2.jpg']  (your own photos)
+  images: ['img/product.png'],        // placeholder illustration; replace with your own photos
   videoUrl: '',      // e.g. 'video/demo.mp4'            (your own video)
   videoPoster: '',   // e.g. 'img/poster.jpg'
 
@@ -124,7 +124,7 @@ window.STORE.videos = [
 // ---------- PRODUCTS (add a new item here when you launch it) ----------
 window.STORE.products = [
   { slug: 'oil-sprayer', name: '2-in-1 Glass Oil Sprayer & Pourer', short: 'Spray and pour, 500 ml',
-    price: 299, mrp: 349, image: '', status: 'live', badge: 'Best seller' },
+    price: 299, mrp: 349, image: 'img/product.png', status: 'live', badge: 'Best seller' },
   { slug: 'coming-1', name: 'New product', short: 'Coming soon', price: null, image: '', status: 'soon' },
   { slug: 'coming-2', name: 'New product', short: 'Coming soon', price: null, image: '', status: 'soon' },
   { slug: 'coming-3', name: 'New product', short: 'Coming soon', price: null, image: '', status: 'soon' }
