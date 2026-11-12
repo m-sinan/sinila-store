@@ -94,10 +94,31 @@
   @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
   @keyframes fall{0%{transform:translateY(0);opacity:0}10%{opacity:.85}100%{transform:translateY(300px);opacity:0}}
+  .s-live{background:linear-gradient(135deg,#17352A,#0B1A14);color:#FFF8E7}
+  .s-live .sl-txt .eb{color:#7CE08A}
+  .s-live .sl-txt p{color:#C9DACC;opacity:1}
+  .s-live .sl-txt h2 em{color:#F7D57A}
+  .pill.gold{background:#F7D57A;color:#17352A}
+  .s-live .sl-art{overflow:visible}
+  .lphone{position:absolute;left:50%;top:14px;width:150px;height:300px;margin-left:-60px;border-radius:24px;background:#0A0F0D;border:4px solid #2A3A32;box-shadow:0 20px 40px #0008;transform:rotate(6deg);overflow:hidden}
+  .lmap{position:absolute;inset:0;width:100%;height:100%}
+  .lsheet{position:absolute;left:6px;right:6px;bottom:44px;background:#fff;border-radius:12px;padding:8px;color:#17352A;z-index:3}
+  .lsheet b{display:block;font-size:10px}.lsheet small{font-size:9px;color:#5C6760}
+  .lbar{height:4px;border-radius:4px;background:#DDE8D6;margin-top:6px;overflow:hidden}
+  .lbar i{display:block;height:100%;width:5%;background:#4D6B45;animation:lfill 8s ease-in-out infinite}
+  @keyframes lfill{0%{width:5%}60%,100%{width:100%}}
+  .ltoast{position:absolute;left:8px;right:8px;top:14px;background:#17352A;color:#fff;border-radius:10px;padding:6px 8px;font-size:9px;font-weight:700;display:flex;align-items:center;gap:6px;z-index:4;transform:translateY(-50px);opacity:0;animation:ltoast 8s ease-in-out infinite}
+  .ltoast i{width:14px;height:14px;border-radius:50%;background:#7CE08A;color:#17352A;font-style:normal;display:grid;place-items:center;font-size:9px}
+  @keyframes ltoast{0%,62%{transform:translateY(-50px);opacity:0}70%,92%{transform:none;opacity:1}100%{transform:translateY(-50px);opacity:0}}
+  .lchip{position:absolute;left:6%;bottom:56px;background:#fff;color:#17352A;font-weight:800;font-size:11px;padding:7px 10px;border-radius:12px;box-shadow:0 8px 20px #0006;z-index:4;animation:lfl 4s ease-in-out infinite}
+  .lchip2{left:auto;right:2%;top:30px;bottom:auto;background:#F7D57A;animation-delay:1.2s}
+  @keyframes lfl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .slider[data-theme="dark"] .dots button{background:rgba(255,255,255,.4)}
+  .slider[data-theme="dark"] .dots button[aria-current="true"]{background:#fff}
   .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:3}
   .dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:rgba(27,35,32,.3);cursor:pointer;transition:width .3s ease,background .3s ease}
   .dots button[aria-current="true"]{background:#1B2320;width:24px}
-  @media(max-width:600px){.slide{grid-template-columns:1.25fr 1fr;min-height:230px;padding:18px}.sl-art{min-height:140px}.bottle{width:min(70%,160px)}}
+  @media(max-width:600px){.lphone{width:110px;height:210px;margin-left:-40px;top:8px}.lchip{display:none}.slide{grid-template-columns:1.25fr 1fr;min-height:230px;padding:18px}.sl-art{min-height:140px}.bottle{width:min(70%,160px)}}
   @media(prefers-reduced-motion:reduce){.track,.slide *{animation:none!important;transition:none!important}.sl-txt>*{opacity:1;transform:none}}
   .feat{margin:14px 0 0;border-radius:20px;background:var(--soft);padding:16px;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center}
   @media(min-width:760px){.feat{grid-template-columns:1fr 240px;padding:28px;gap:28px}}
@@ -174,10 +195,28 @@
         <div class="sl-txt"><span class="eb">Best seller</span><h2>Use less oil.<br>Keep the flavour.</h2><p>2-in-1 glass sprayer and pourer, 500 ml.</p><span class="cta"><span class="pill">Shop now →</span></span></div>
         <div class="sl-art"><span class="spark sp1">✦</span><span class="spark sp2">✦</span><div class="bottle"><svg viewBox="0 0 200 240" aria-hidden="true"><rect x="84" y="12" width="32" height="20" rx="4" fill="#1B2320"/><rect x="66" y="30" width="68" height="18" rx="6" fill="#1B2320"/><rect x="60" y="46" width="80" height="170" rx="22" fill="#fff" stroke="#1B2320" stroke-width="4"/><rect x="60" y="150" width="80" height="66" rx="18" fill="#D7A63A"/><rect x="74" y="70" width="8" height="110" rx="4" fill="#fff" opacity=".8"/></svg></div></div>
       </a>
-      <a class="slide s-xmas" href="product.html?p=oil-sprayer">
+      <a class="slide s-xmas dark" href="product.html?p=oil-sprayer">
         <div class="snowfield" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div class="sl-txt"><span class="eb">Christmas offer</span><h2>14% off<br><em>this Christmas</em></h2><p>2-in-1 glass oil sprayer and pourer. <b>₹299</b> <s class="xold">₹349</s></p><span class="cta"><span class="pill red">Shop now →</span></span></div>
         <div class="sl-art"><span class="spark sp1">★</span><div class="bottle"><svg viewBox="0 0 200 240" aria-hidden="true"><rect x="84" y="12" width="32" height="20" rx="4" fill="#1B2320"/><rect x="66" y="30" width="68" height="18" rx="6" fill="#1B2320"/><rect x="60" y="46" width="80" height="170" rx="22" fill="#fff" stroke="#1B2320" stroke-width="4"/><rect x="60" y="150" width="80" height="66" rx="18" fill="#D7A63A"/><rect x="74" y="70" width="8" height="110" rx="4" fill="#fff" opacity=".8"/></svg></div></div>
+      </a>
+      <a class="slide s-live dark" href="product.html?p=oil-sprayer">
+        <div class="sl-txt"><span class="eb">Live delivery</span><h2>On its way.<br><em>Delivered safe.</em></h2><p>Track every order from packing to your doorstep. Free delivery across India.</p><span class="cta"><span class="pill gold">Shop now →</span></span></div>
+        <div class="sl-art" aria-hidden="true">
+          <span class="lchip">📦 Packed with care</span><span class="lchip lchip2">🛡 Safe delivery</span>
+          <div class="lphone">
+            <div class="ltoast"><i>✓</i>Delivered. Enjoy your Sinila!</div>
+            <svg class="lmap" viewBox="0 0 220 470" preserveAspectRatio="xMidYMid slice">
+              <rect width="220" height="470" fill="#E6EFE0"/><rect x="150" y="40" width="70" height="90" fill="#CFE3C6"/><rect x="-10" y="250" width="80" height="60" fill="#CFE3C6"/>
+              <g stroke="#fff" stroke-width="14" fill="none" stroke-linecap="round"><path d="M-10 110 H230"/><path d="M-10 230 H230"/><path d="M-10 350 H230"/><path d="M60 -10 V480"/><path d="M160 -10 V480"/></g>
+              <g stroke="#fff" stroke-width="6" fill="none"><path d="M-10 170 H230"/><path d="M-10 290 H230"/><path d="M110 -10 V480"/></g>
+              <path id="lr" d="M60 400 V230 H160 V110" fill="none" stroke="#4D6B45" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/>
+              <g transform="translate(160 110)"><circle r="16" fill="#4D6B4533"/><circle r="9" fill="#4D6B45"/><circle r="3.5" fill="#fff"/></g>
+              <g><circle r="14" fill="#F7D57A"/><circle r="14" fill="none" stroke="#17352A" stroke-width="3"/><path d="M-6 0 L-2 4 L6 -5" fill="none" stroke="#17352A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.6;1" calcMode="linear"><mpath href="#lr"/></animateMotion></g>
+            </svg>
+            <div class="lsheet"><b>Your Sinila is on the way</b><small>Arriving today</small><div class="lbar"><i></i></div></div>
+          </div>
+        </div>
       </a>
     </div>
     <div class="dots" id="dots"></div>
@@ -272,7 +311,7 @@
     var sl=document.getElementById('slider');if(!sl)return;
     var track=sl.querySelector('.track'),dots=document.getElementById('dots'),n=track.children.length,i=0,timer=null,x0=null;
     for(var k=0;k<n;k++){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Show offer '+(k+1));dots.appendChild(d)}
-    function show(k){i=(k+n)%n;track.style.transform='translateX('+(-i*100)+'%)';[].forEach.call(track.children,function(c,j){c.classList.toggle('on',j===i)});[].forEach.call(dots.children,function(b,j){b.setAttribute('aria-current',j===i?'true':'false')})}
+    function show(k){i=(k+n)%n;track.style.transform='translateX('+(-i*100)+'%)';[].forEach.call(track.children,function(c,j){c.classList.toggle('on',j===i)});sl.setAttribute('data-theme',track.children[i].classList.contains('dark')?'dark':'light');[].forEach.call(dots.children,function(b,j){b.setAttribute('aria-current',j===i?'true':'false')})}
     function start(){if(n<2||matchMedia('(prefers-reduced-motion: reduce)').matches)return;stop();timer=setInterval(function(){show(i+1)},5000)}
     function stop(){clearInterval(timer);timer=null}
     dots.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;e.preventDefault();show([].indexOf.call(dots.children,b));start()});
